@@ -1,0 +1,90 @@
+PODS:
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
+  - ChameleonFramework/Default (2.1.0)
+  - Classy (1.0.0)
+  - IGListKit (3.4.0):
+    - IGListKit/Default (= 3.4.0)
+  - IGListKit/Default (3.4.0):
+    - IGListKit/Diffing
+  - IGListKit/Diffing (3.4.0)
+  - IQKeyboardManager (6.2.0)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - Masonry (1.1.0)
+  - MGJRouter (0.10.0)
+  - oc-string (0.0.1):
+    - RegexKitLite (~> 4.0)
+    - YYKit (~> 1.0.9)
+  - pop (1.0.12)
+  - ReactiveObjC (3.1.0)
+  - RegexKitLite (4.0)
+  - SDWebImage (4.4.3):
+    - SDWebImage/Core (= 4.4.3)
+  - SDWebImage/Core (4.4.3)
+  - SVProgressHUD (2.2.5)
+  - ui-base (0.0.3):
+    - ChameleonFramework
+    - Classy
+    - IQKeyboardManager
+    - Masonry
+    - oc-string
+    - pop
+    - SDWebImage
+    - SVProgressHUD
+    - YYKit
+  - YYKit (1.0.9):
+    - YYKit/no-arc (= 1.0.9)
+  - YYKit/no-arc (1.0.9)
+
+DEPENDENCIES:
+  - IGListKit
+  - MagicalRecord
+  - MGJRouter
+  - oc-string (from `../../base/oc-string/oc-string.podspec`)
+  - ReactiveObjC
+  - ui-base (from `../../ui/ui-base/ui-base.podspec`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ChameleonFramework
+    - Classy
+    - IGListKit
+    - IQKeyboardManager
+    - MagicalRecord
+    - Masonry
+    - MGJRouter
+    - pop
+    - ReactiveObjC
+    - RegexKitLite
+    - SDWebImage
+    - SVProgressHUD
+    - YYKit
+
+EXTERNAL SOURCES:
+  oc-string:
+    :podspec: "../../base/oc-string/oc-string.podspec"
+  ui-base:
+    :podspec: "../../ui/ui-base/ui-base.podspec"
+
+SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  Classy: bbe2436d6872dfeda5eaa2a3c3d705a9c30b1709
+  IGListKit: 7a5d788e9fb746bcd402baa8e8b24bc3bd2a5a07
+  IQKeyboardManager: 6194101620b73af5e67900b8f89707a99de0b804
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MGJRouter: 15d94541eb2cc81eff7d577337288feb7ae9575f
+  oc-string: d792cc8683f4fe5ce9f60dc8bf4716f1baf68aaf
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  ReactiveObjC: 2a38ea15335de4119d8b17caf1db1484f61db902
+  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
+  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  ui-base: b65b2abce275484311effb42a6d0b369fe55083c
+  YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+
+PODFILE CHECKSUM: eae8ff78a792cfbf0172e6593527f87b34725043
+
+COCOAPODS: 1.5.3
