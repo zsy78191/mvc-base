@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "mvc-base"
-  s.version      = "0.0.1"
+  s.version      = "0.0.4"
   s.summary      = "自用代码库MVC框架"
 
   # This description is used to generate tags and improve search results.
@@ -134,5 +134,9 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "oc-string"
+  s.dependency "ui-base"
+  s.dependency "ReactiveObjC"
+  s.dependency "MagicalRecord"
+  s.dependency "MGJRouter"
 
 end
