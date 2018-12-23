@@ -9,6 +9,7 @@
 #import "MVPTableViewOutput.h"
 @import UIKit;
 #import "MVPModel.h"
+@import DZNEmptyDataSet;
 @interface MVPTableViewOutput () <UITableViewDelegate,UITableViewDataSource>
 {
     
@@ -121,6 +122,12 @@
 - (void)insertSectionAtIndex:(NSUInteger)idx {
     [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+
+- (void)setEmpty:(__kindof MVPEmptyMiddleware *)empty {
+    [self.tableview setEmptyDataSetSource:empty];
+    [self.tableview setEmptyDataSetDelegate:empty];
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

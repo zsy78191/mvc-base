@@ -7,15 +7,14 @@
 //
 
 #import "MVPView.h"
-
+#import "MVPEmptyMiddleware.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class MVPBaseMiddleware;
 
 @interface MVPListView : MVPView
 
-
-
+@property (nonatomic, strong) MVPEmptyMiddleware* empty;
 
 @end
 

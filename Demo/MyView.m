@@ -60,6 +60,8 @@
     MVPTableViewOutput* o = [[MVPTableViewOutput alloc] init];
     [o mvp_registerNib:[UINib nibWithNibName:@"MyCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCell"];
     self.outputMiddleware = o;
+    
+    self.empty = [[MVPEmptyMiddleware alloc] init];
 }
 
 

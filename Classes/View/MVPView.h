@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithUserInfo:(NSDictionary*)userinfo;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

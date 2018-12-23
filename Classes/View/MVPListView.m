@@ -14,9 +14,8 @@
     
 }
 
-
-
 @property (nonatomic, strong) __kindof UIView* manageView;
+
 
 @end
 
@@ -43,6 +42,10 @@
     if (self.inputMiddleware) {
         self.outputMiddleware.inputer = self.inputMiddleware;
         self.inputMiddleware.outputer = self.outputMiddleware;
+    }
+    
+    if (self.empty) {
+        [self.outputMiddleware setEmpty:self.empty];
     }
     
 //    NSLog(@"%s",__func__);

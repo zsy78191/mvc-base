@@ -11,6 +11,7 @@ target 'mvc-base' do
   pod 'MagicalRecord'
   pod 'MGJRouter'
   pod 'IGListKit'
+  pod 'DZNEmptyDataSet'
   # Pods for mvc-base
 
   target 'mvc-baseTests' do
@@ -23,9 +24,4 @@ target 'mvc-base' do
     # Pods for testing
   end
 
-end
-
-target 'demo2' do
-    use_frameworks!
-    pod 'IGListKit'
 end

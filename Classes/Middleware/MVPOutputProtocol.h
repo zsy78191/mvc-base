@@ -9,17 +9,15 @@
 #ifndef MVPOutputProtocol_g_h
 #define MVPOutputProtocol_g_h
 @class UIView;
-//@class MVCModel;
+@class MVPEmptyMiddleware;
 @protocol MVPOutputProtocol,MVPModelProtocol;
 @protocol MVPInputProtocol <NSObject>
 
 - (NSUInteger)numberOfSections;
 - (NSUInteger)numberOfRowsInSection:(NSUInteger)section;
 
-
-
 @required
-- (Class)mvp_modelClass;
+
 - (NSUInteger)mvp_addModel:(id<MVPModelProtocol>)model;
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath*)path;
@@ -50,6 +48,10 @@
 
 - (void)insertSectionAtIndex:(NSUInteger)idx;
 - (void)deleteSectionAtIndex:(NSUInteger)idx;
+
+
+- (void)setEmpty:(__kindof MVPEmptyMiddleware*)empty;
+
 @end
 
 #endif /* MVPOutputProtocol_g_h */

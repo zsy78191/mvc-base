@@ -138,5 +138,6 @@ Pod::Spec.new do |s|
   s.dependency "ReactiveObjC"
   s.dependency "MagicalRecord"
   s.dependency "MGJRouter"
+  s.dependency "DZNEmptyDataSet"
 
 end

@@ -10,6 +10,7 @@
 		45F6F706CF0B2C064376E0B7 /* Pods_mvc_base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248DAF8A6E53E7A23A4C4176 /* Pods_mvc_base.framework */; };
 		5F7B1727978314E2FA8B166E /* Pods_mvc_baseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E27275E262AED75EE60B5518 /* Pods_mvc_baseTests.framework */; };
 		852DEB6B7494F86E311890AF /* Pods_mvc_baseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE7715728A131BE56F93DB9 /* Pods_mvc_baseUITests.framework */; };
+		D40EDA5421CFD6060018F46E /* MVPEmptyMiddleware.m in Sources */ = {isa = PBXBuildFile; fileRef = D40EDA5321CFD6060018F46E /* MVPEmptyMiddleware.m */; };
 		D46A999821CA324B0019AE67 /* MainInput.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A999721CA324B0019AE67 /* MainInput.m */; };
 		D46A999C21CA487F0019AE67 /* MyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A999B21CA487F0019AE67 /* MyModel.m */; };
 		D46A99A421CA48EA0019AE67 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46A99A221CA48EA0019AE67 /* MyCell.m */; };
@@ -70,6 +71,8 @@
 		A17F8F6E09677FC406160921 /* Pods_demo2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_demo2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0C70F99569FAFA9929E7C3F /* Pods-mvc-baseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mvc-baseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mvc-baseTests/Pods-mvc-baseTests.release.xcconfig"; sourceTree = "<group>"; };
 		D324A4A765974D7D707128B0 /* Pods-demo2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-demo2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-demo2/Pods-demo2.debug.xcconfig"; sourceTree = "<group>"; };
+		D40EDA5221CFD6060018F46E /* MVPEmptyMiddleware.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MVPEmptyMiddleware.h; sourceTree = "<group>"; };
+		D40EDA5321CFD6060018F46E /* MVPEmptyMiddleware.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MVPEmptyMiddleware.m; sourceTree = "<group>"; };
 		D46A999221CA315F0019AE67 /* mvc-base.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mvc-base.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46A999321CA315F0019AE67 /* mvc-baseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mvc-baseTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46A999421CA315F0019AE67 /* mvc-baseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mvc-baseUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,6 +410,8 @@
 				D4E5B40621C7AAAF005856FE /* Input */,
 				D4E5B40321C7AA1A005856FE /* MVPBaseMiddleware.h */,
 				D4E5B40421C7AA1A005856FE /* MVPBaseMiddleware.m */,
+				D40EDA5221CFD6060018F46E /* MVPEmptyMiddleware.h */,
+				D40EDA5321CFD6060018F46E /* MVPEmptyMiddleware.m */,
 			);
 			path = Middleware;
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-mvc-base/Pods-mvc-base-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/Classy/Classy.framework",
+				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MGJRouter/MGJRouter.framework",
@@ -589,6 +595,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Classy.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MGJRouter.framework",
@@ -672,6 +679,7 @@
 				D47B69F121CE124500214999 /* CorePresenter.m in Sources */,
 				D47B69F721CE126300214999 /* CoreInput.m in Sources */,
 				D47B6A0C21CF87D900214999 /* MVPRouter.m in Sources */,
+				D40EDA5421CFD6060018F46E /* MVPEmptyMiddleware.m in Sources */,
 				D47B6A0121CEC1F700214999 /* CoreCell.m in Sources */,
 				D46DFBC621C366CB00675B86 /* UIViewController+BackButtonHandler.m in Sources */,
 				D46DFBD121C373A400675B86 /* MyPresenter.m in Sources */,
