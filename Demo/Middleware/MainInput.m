@@ -10,7 +10,7 @@
 #import "MyModel.h"
 @implementation MainInput
 
-- (NSString *)identifierForModel:(id<MVPModelProtocol>)model
+- (NSString *)mvp_identifierForModel:(id<MVPModelProtocol>)model
 {
     if ([model isKindOfClass:[MyModel class]]) {
         return @"MyCell";

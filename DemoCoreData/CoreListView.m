@@ -10,7 +10,9 @@
 #import "MVPTableViewOutput.h"
 
 @interface CoreListView ()
-
+{
+}
+@property (nonatomic, strong) NSString* type;
 @end
 
 @implementation CoreListView
@@ -19,7 +21,9 @@
 {
     self = [super initWithUserInfo:userinfo];
     if (self) {
-        NSLog(@"%@",userinfo);
+//        NSLog(@"%@",userinfo);
+
+        
     }
     return self;
 }
@@ -33,7 +37,7 @@
     self.navigationItem.rightBarButtonItem = i;
 }
 
-- (Class)mvc_presenterClass
+- (Class)mvp_presenterClass
 {
     return NSClassFromString(@"CorePresenter");
 }
@@ -41,8 +45,12 @@
 - (void)mvc_configMiddleware
 {
     [super mvc_configMiddleware];
+    
+    
     MVPTableViewOutput* output = self.outputMiddleware = [[MVPTableViewOutput alloc] init];
     [output mvp_registerClass:NSClassFromString(@"CoreCell") forCellReuseIdentifier:@"CoreCell"];
+    
+    self.empty = [[MVPEmptyMiddleware alloc] init];
 }
 
 /*

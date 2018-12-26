@@ -17,7 +17,9 @@
 
 - (void)registRouter
 {
-     [MVPRouter registView:NSClassFromString(@"CoreListView") forURL:@"demo://corelistview"];
+    [MVPRouter registView:NSClassFromString(@"CoreListView") forURL:@"demo://corelistview"];
+    [MVPRouter registView:NSClassFromString(@"DMView") forURL:@"demo://demoui"];
+    [MVPRouter registView:NSClassFromString(@"DCView") forURL:@"demo://democollectionview"];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

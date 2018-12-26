@@ -12,7 +12,7 @@
 @import MagicalRecord;
 @implementation CoreInput
 
-- (NSString *)identifierForModel:(id<MVPModelProtocol>)model
+- (NSString *)mvp_identifierForModel:(id<MVPModelProtocol>)model
 {
     return @"CoreCell";
 }

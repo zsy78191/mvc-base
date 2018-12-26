@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@protocol MVPPresenterProtocol;
+@protocol MVPPresenterProtocol,MVPPresenterProtocol_private;
 @interface MVPBaseMiddleware : NSObject
 
-@property (nonatomic, weak) id<MVPPresenterProtocol> presenter;
+@property (nonatomic, weak) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
 
 @end
 

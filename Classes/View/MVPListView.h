@@ -10,8 +10,9 @@
 #import "MVPEmptyMiddleware.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@class MVPBaseMiddleware;
-
+/**
+ MVPListView 支持两种Outputer，TableView和CollectionView
+ */
 @interface MVPListView : MVPView
 
 @property (nonatomic, strong) MVPEmptyMiddleware* empty;

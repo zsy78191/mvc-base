@@ -9,11 +9,27 @@
 #ifndef MVCProtocol_h
 #define MVCProtocol_h
 
+//@protocol MVPTupleProtocol <NSObject>
+//
+//- (NSArray *)allObjects;
+//@property (nonatomic, readonly, nullable) id first;
+//@property (nonatomic, readonly, nullable) id second;
+//@property (nonatomic, readonly, nullable) id third;
+//@property (nonatomic, readonly, nullable) id fourth;
+//@property (nonatomic, readonly, nullable) id fifth;
+//@property (nonatomic, readonly, nullable) id last;
+//@property (nonatomic, readonly) NSUInteger count;
+//
+//@end
 
-@protocol MVPViewProtocol,MVPOutputProtocol;
+@protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol;
 @class UIViewController;
+
 @protocol MVPModelProtocol <NSObject>
+
 - (NSArray *)propertys;
+@property (nonatomic, weak) id<MVPInputProtocol> inputer;
+
 @end
 
 @protocol MVPPresenterProtocol <NSObject>
@@ -28,6 +44,7 @@
 
 #pragma mark - action
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath*)path;
+- (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value;
 
 @required
 - (id)mvp_inputerWithOutput:(id<MVPOutputProtocol>)output;
@@ -43,9 +60,9 @@
 - (void)mvp_dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);;
 
 @required
-- (Class)mvc_presenterClass;
-- (void)mvc_configMiddleware;
+- (Class)mvp_presenterClass;
 
 @end
+ 
 
 #endif /* MVCProtocol_h */

@@ -8,6 +8,14 @@
 
 #import "MVPModel.h"
 #import <objc/runtime.h>
+#import "MVPOutputProtocol.h"
+@interface MVPModel()
+{
+    
+}
+
+@end
+
 @implementation MVPModel
 
 - (NSString *)identifier
@@ -34,4 +42,7 @@
     free(propertyList);
     return propertyArray.copy;
 }
+
+@synthesize inputer;
+
 @end

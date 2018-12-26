@@ -43,7 +43,9 @@
 - (void)mvp_bindBlock:(void (^)(id, id))block keypath:(NSString *)keypath
 {
     RACSignal* s =  [self rac_valuesForKeyPath:keypath observer:self];
+    @weakify(self);
     [s subscribeNext:^(id  _Nullable x) {
+        @strongify(self);
         if (block) {
             block(self.view,x);
         }
@@ -112,20 +114,20 @@
 
 - (void)mvc_action:(id)sender
 {
-//    NSLog(@"%@",sender);
-//    if ([self respondsToSelector:@selector(reviceAcion:)]) {
-//        [self reviceAcion:sender];
-//    }
-    
     NSString* action = [[self table] objectForKey:sender];
-    SEL s = NSSelectorFromString(action);
+    [self mvp_runAction:action];
+}
+
+- (void)mvp_runAction:(NSString*)actionName;
+{
+    SEL s = NSSelectorFromString(actionName);
     if ([self respondsToSelector:s]) {
         IMP imp = [self methodForSelector:s];
         void (*func)(id, SEL) = (void *)imp;
         func(self, s);
     }
     else{
-        NSLog(@"%@'s selector [%@] unexist",self,action);
+        NSLog(@"%@'s selector [%@] unexist",self,actionName);
     }
 }
 
@@ -143,6 +145,12 @@
 {
     
 }
+
+- (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value
+{
+    
+}
+
 
 
  

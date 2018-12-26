@@ -10,6 +10,10 @@
 @import ReactiveObjC;
 #import "MVPBaseMiddleware.h"
 #import "MVPProtocol_private.h"
+#import "MVPViewApperanceProtocol.h"
+#import "MVPViewApperance.h"
+#import "MVPSubview.h"
+#import "MVPOutputProtocol.h"
 //#import "MyItem.h"
 @interface MVPView ()
 @property (nonatomic, strong, readwrite) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
@@ -48,8 +52,9 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
 
 - (void)viewDidLoad_mvcbase;
 {
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    id<MVPPresenterProtocol,MVPPresenterProtocol_private> p = [[[self mvc_presenterClass] alloc] init];
+    id<MVPPresenterProtocol,MVPPresenterProtocol_private> p = [[[self mvp_presenterClass] alloc] init];
     self.presenter = p;
     p.view = self;
     
@@ -76,9 +81,34 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     if ([self respondsToSelector:@selector(mvc_bindAction)]) {
         [self mvc_bindAction];
     }
+    
+    self.view.tag = MVPViewTagContentView;
+    
+    if (self.apperMiddleware) {
+        [self.apperMiddleware mvp_setupView:self.view];
+    }
 }
 
-- (Class)mvc_presenterClass
+- (void)loadView
+{
+    self.view = ({
+        MVPSubView* v = [[MVPSubView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        [v setView:self];
+        v;
+    });
+}
+
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    if ([self.outputMiddleware respondsToSelector:@selector(setEditing:animated:)]) {
+        [self.outputMiddleware setEditing:editing animated:animated];
+    }
+    
+}
+
+- (Class)mvp_presenterClass
 {
     return NSClassFromString(@"MVCPresenter");
 }

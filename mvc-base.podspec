@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "mvc-base"
-  s.version      = "0.0.4"
+  s.version      = "0.0.6"
   s.summary      = "自用代码库MVC框架"
 
   # This description is used to generate tags and improve search results.
@@ -139,5 +139,6 @@ Pod::Spec.new do |s|
   s.dependency "MagicalRecord"
   s.dependency "MGJRouter"
   s.dependency "DZNEmptyDataSet"
+  s.dependency "Masonry"
 
 end

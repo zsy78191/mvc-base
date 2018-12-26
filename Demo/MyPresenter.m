@@ -56,6 +56,26 @@
     [self.view mvp_pushViewController:view];
 }
 
+- (void)openCore2
+{
+    //    CoreListView* view = [[CoreListView alloc] init];
+    id view = [MVPRouter viewForURL:@"demo://democollectionview" withUserInfo:@{@"type":@"collection"}];
+    [self.view mvp_pushViewController:view];
+}
+
+
+- (void)openUI
+{
+    id view = [MVPRouter viewForURL:@"demo://demoui" withUserInfo:@{@"a":@(1)}];
+    [self.view mvp_pushViewController:view];
+}
+
+- (void)openCollectionView:(id)a
+{
+    id view = [MVPRouter viewForURL:@"demo://democollectionview" withUserInfo:nil];
+    [self.view mvp_pushViewController:view];
+}
+
 @end
 
 

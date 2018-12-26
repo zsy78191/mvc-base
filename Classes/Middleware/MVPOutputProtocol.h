@@ -10,11 +10,12 @@
 #define MVPOutputProtocol_g_h
 @class UIView;
 @class MVPEmptyMiddleware;
-@protocol MVPOutputProtocol,MVPModelProtocol;
+@protocol MVPOutputProtocol,MVPModelProtocol,MVPPresenterProtocol,MVPPresenterProtocol_private;
 @protocol MVPInputProtocol <NSObject>
 
 - (NSUInteger)numberOfSections;
 - (NSUInteger)numberOfRowsInSection:(NSUInteger)section;
+- (id)allModels;
 
 @required
 
@@ -22,12 +23,14 @@
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath*)path;
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath*)path;
+- (void)mvp_modeModelFromIndexPath:(NSIndexPath*)path1 toPath:(NSIndexPath*)path2;
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath*)path;
 - (NSUInteger)mvp_count;
 @property (nonatomic, weak) id<MVPOutputProtocol> outputer;
+@property (nonatomic, weak) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
 
 @optional
-- (NSString*)identifierForModel:(id<MVPModelProtocol>)model;
+- (NSString*)mvp_identifierForModel:(id<MVPModelProtocol>)model;
 - (NSArray<NSSortDescriptor *> *) sortDescriptors;
 - (NSPredicate*)predicate;
 
@@ -39,18 +42,25 @@
 
 - (__kindof UIView*)outputView;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;
+@property (nonatomic, assign) BOOL canMove;
 
 - (void)beginUpdates;
 - (void)endUpdates;
+
 - (void)insertAtIndexPath:(NSIndexPath*)path;
 - (void)deleleAtIndexPath:(NSIndexPath*)path;
 - (void)updateAtIndexPath:(NSIndexPath*)path;
+- (void)insertAtIndexPaths:(NSArray*)paths;
+- (void)deleleAtIndexPaths:(NSArray*)paths;
+- (void)updateAtIndexPaths:(NSArray*)paths;
 
 - (void)insertSectionAtIndex:(NSUInteger)idx;
 - (void)deleteSectionAtIndex:(NSUInteger)idx;
-
-
 - (void)setEmpty:(__kindof MVPEmptyMiddleware*)empty;
+
+@optional
+- (void)performBatchUpdates:(void (^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 
 @end
 

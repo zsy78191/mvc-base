@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (Class)routerClass;
 @property (nonatomic, strong) __kindof MVPRouter* router;
+
 @end
 
 NS_ASSUME_NONNULL_END

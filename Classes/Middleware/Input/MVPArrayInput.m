@@ -18,7 +18,10 @@
 
 @implementation MVPArrayInput
 
-
+- (id)allModels
+{
+    return [self.table copy];
+}
 
 - (NSMutableArray *)table
 {
@@ -41,6 +44,12 @@
     return 1;
 }
 
+- (void)mvp_modeModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
+{
+    id obj = [self.table objectAtIndex:path1.row];
+    [self.table removeObjectAtIndex:path1.row];
+    [self.table insertObject:obj atIndex:path2.row];
+}
 
 - (void)test
 {
@@ -52,6 +61,7 @@
     [self.table addObject:model];
     NSUInteger index = [self.table count] - 1;
     [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    [(id)model setInputer:self];
     return index;
 }
 
@@ -59,22 +69,24 @@
 {
     [self.table insertObject:model atIndex:idx];
     [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+    [(id)model setInputer:self];
     return idx;
 }
 
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path
 {
-    NSUInteger idx = [path indexAtPosition:0];
+    NSUInteger idx = [path row];
     id obj = [self.table objectAtIndex:idx];
     [self.table removeObjectAtIndex:idx];
     [self.outputer deleleAtIndexPath:path];
+    [(id)obj setInputer:nil];
     return obj;
     
 }
 
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath *)path
 {
-    NSUInteger idx = [path indexAtPosition:0];
+    NSUInteger idx = [path row];
     [self.table removeObjectAtIndex:idx];
     [self.table insertObject:model atIndex:idx];
     [self.outputer updateAtIndexPath:path];
@@ -82,7 +94,7 @@
 
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath *)path
 {
-    return [self.table objectAtIndex:[path indexAtPosition:0]];
+    return [self.table objectAtIndex:[path row]];
 }
 
 - (NSUInteger)mvp_count

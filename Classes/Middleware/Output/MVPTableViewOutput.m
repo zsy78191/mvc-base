@@ -53,11 +53,11 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (!self.inputer) {
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         return cell;
     }
     MVPModel* m = [self.inputer mvp_modelAtIndexPath:indexPath];
-    NSString* identifier = [[self inputer] identifierForModel:m];
+    NSString* identifier = [[self inputer] mvp_identifierForModel:m];
     __kindof UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if ([cell respondsToSelector:@selector(loadModel:)]) {
         [(id)cell loadModel:m];
@@ -80,13 +80,16 @@
 {
 //    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
     [self.tableview insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updataEmpty];
 }
 
 - (void)deleleAtIndexPath:(NSIndexPath *)path
 {
 //    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
     [self.tableview deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updataEmpty];
 }
+
 
 - (void)updateAtIndexPath:(NSIndexPath *)path
 {
@@ -116,17 +119,46 @@
 
 - (void)deleteSectionAtIndex:(NSUInteger)idx {
     [self.tableview deleteSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updataEmpty];
 }
 
 
 - (void)insertSectionAtIndex:(NSUInteger)idx {
     [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updataEmpty];
 }
 
 - (void)setEmpty:(__kindof MVPEmptyMiddleware *)empty {
     [self.tableview setEmptyDataSetSource:empty];
     [self.tableview setEmptyDataSetDelegate:empty];
 }
+
+- (void)deleleAtIndexPaths:(NSArray *)paths {
+    [self.tableview deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updataEmpty];
+}
+
+- (void)updataEmpty
+{
+    if ([self.inputer mvp_count] == 1 || [self.inputer mvp_count] == 0) {
+        [self.tableview reloadEmptyDataSet];
+    }
+    else if ([self.inputer numberOfSections] == 1 || [self.inputer numberOfSections] == 0) {
+        [self.tableview reloadEmptyDataSet];
+    }
+}
+
+
+- (void)insertAtIndexPaths:(NSArray *)paths {
+    [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self updataEmpty];
+}
+
+
+- (void)updateAtIndexPaths:(NSArray *)paths {
+     [self.tableview reloadRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -139,7 +171,30 @@
     return 300;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [[self tableview] setEditing:editing animated:animated];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    if ([self.inputer respondsToSelector:@selector(mvp_modeModelFromIndexPath:toPath:)]) {
+        [self.inputer mvp_modeModelFromIndexPath:sourceIndexPath toPath:destinationIndexPath];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.canMove;
+}
 
 @synthesize inputer;
+
+@synthesize canMove;
 
 @end

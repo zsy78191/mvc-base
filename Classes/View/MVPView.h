@@ -10,6 +10,7 @@
 #import "MVPProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class MVPViewApperance;
 @protocol MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private;
 @interface MVPView : UIViewController <MVPViewProtocol>
 {
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @property (nonatomic, strong, readonly) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
-
+- (void)mvc_configMiddleware NS_REQUIRES_SUPER;
 - (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString*)name;
 
 #pragma mark - config
@@ -33,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) __kindof id<MVPOutputProtocol> outputMiddleware;
 @property (nonatomic, strong) __kindof id<MVPInputProtocol> inputMiddleware;
+@property (nonatomic, strong) __kindof MVPViewApperance* apperMiddleware;
 
 - (instancetype)initWithUserInfo:(NSDictionary*)userinfo;
 

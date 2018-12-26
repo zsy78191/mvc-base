@@ -25,7 +25,7 @@ PODS:
     - SDWebImage/Core (= 4.4.3)
   - SDWebImage/Core (4.4.3)
   - SVProgressHUD (2.2.5)
-  - ui-base (0.0.3):
+  - ui-base (0.0.5):
     - ChameleonFramework
     - Classy
     - IQKeyboardManager
@@ -86,7 +86,7 @@ SPEC CHECKSUMS:
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  ui-base: a37de1d1e07b9917c5ebe40d8e984092ee83d668
+  ui-base: 992bf482cac788739b741c28d1be499d9fbac374
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
 PODFILE CHECKSUM: 56540f2b90e172f9c67ae9ca15c5afd7f70595a8
