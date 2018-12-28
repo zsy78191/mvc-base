@@ -66,7 +66,7 @@
 
 - (void)openUI
 {
-    id view = [MVPRouter viewForURL:@"demo://demoui" withUserInfo:@{@"a":@(1)}];
+    id view = [MVPRouter viewForURL:@"demo://demoui?asd=123" withUserInfo:@{@"a":@(1)}];
     [self.view mvp_pushViewController:view];
 }
 

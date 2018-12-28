@@ -151,6 +151,10 @@
     
 }
 
+- (void)mvp_initFromModel:(id)model
+{
+    
+}
 
 
  

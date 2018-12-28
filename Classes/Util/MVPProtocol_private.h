@@ -9,11 +9,13 @@
 #ifndef MVCProtocol_private_h
 #define MVCProtocol_private_h
 
+ 
 @protocol MVPPresenterProtocol_private <NSObject>
 
 - (void)mvp_registActionName:(NSString*)name item:(id)item;
 - (void)mvp_removeActionForItem:(id)item;
 - (void)mvp_runAction:(NSString*)actionName;
+
 
 @end
 

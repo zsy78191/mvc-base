@@ -14,6 +14,7 @@
 #import "MVPViewApperance.h"
 #import "MVPSubview.h"
 #import "MVPOutputProtocol.h"
+#import "MVPInitModel.h"
 //#import "MyItem.h"
 @interface MVPView ()
 @property (nonatomic, strong, readwrite) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
@@ -21,12 +22,22 @@
 
 @implementation MVPView
 
+- (void)mvp_initFromModel:(MVPInitModel *)model
+{
+    
+}
 
 - (instancetype)initWithUserInfo:(NSDictionary *)userinfo
 {
     self = [super init];
     if (self) {
-        
+        MVPInitModel* m = [[MVPInitModel alloc] initWithMJDictionary:userinfo];
+        if ([self respondsToSelector:@selector(mvp_initFromModel:)]) {
+            [self mvp_initFromModel:m];
+        }
+        if ([self.presenter respondsToSelector:@selector(mvp_initFromModel:)]) {
+            [self.presenter mvp_initFromModel:m];
+        }
     }
     return self;
 }
@@ -50,36 +61,41 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     [(MVPBaseMiddleware*)_outputMiddleware setPresenter:self.presenter];
 }
 
+
+- (id<MVPPresenterProtocol,MVPPresenterProtocol_private>)presenter
+{
+    if (!_presenter) {
+        _presenter = [[[self mvp_presenterClass] alloc] init];
+        _presenter.view = self;
+    }
+    return _presenter;
+}
+
 - (void)viewDidLoad_mvcbase;
 {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    id<MVPPresenterProtocol,MVPPresenterProtocol_private> p = [[[self mvp_presenterClass] alloc] init];
-    self.presenter = p;
-    p.view = self;
-    
-    if ([self respondsToSelector:@selector(mvc_configMiddleware)]) {
-        [self mvc_configMiddleware];
+    if ([self respondsToSelector:@selector(mvp_configMiddleware)]) {
+        [self mvp_configMiddleware];
     }
     
     [self viewDidLoad_mvcbase];
     
  
-    
-    if ([self respondsToSelector:@selector(mvc_configTable)]) {
-        [self mvc_configTable];
+    if ([self respondsToSelector:@selector(mvp_configTable)]) {
+        [self mvp_configTable];
     }
     
-    if ([self respondsToSelector:@selector(mvc_configOther)]) {
-        [self mvc_configOther];
+    if ([self respondsToSelector:@selector(mvp_configOther)]) {
+        [self mvp_configOther];
     }
     
-    if ([self respondsToSelector:@selector(mvc_bindData)]) {
-        [self mvc_bindData];
+    if ([self respondsToSelector:@selector(mvp_bindData)]) {
+        [self mvp_bindData];
     }
     
-    if ([self respondsToSelector:@selector(mvc_bindAction)]) {
-        [self mvc_bindAction];
+    if ([self respondsToSelector:@selector(mvp_bindAction)]) {
+        [self mvp_bindAction];
     }
     
     self.view.tag = MVPViewTagContentView;
@@ -110,31 +126,31 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
 
 - (Class)mvp_presenterClass
 {
-    return NSClassFromString(@"MVCPresenter");
+    return NSClassFromString(@"MVPPresenter");
 }
 
--(void)mvc_bindData
+-(void)mvp_bindData
 {
     
 }
 
-- (void)mvc_bindAction
+- (void)mvp_bindAction
 {
     
 }
 
-- (void)mvc_configOther
+- (void)mvp_configOther
 {
     
 }
 
 
-- (void)mvc_configTable
+- (void)mvp_configTable
 {
     
 }
 
-- (void)mvc_configMiddleware
+- (void)mvp_configMiddleware
 {
     
 }

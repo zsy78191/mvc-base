@@ -76,5 +76,10 @@
 }
 
 
+- (void)mvp_initFromModel:(MVPInitModel *)model
+{
+    NSLog(@"%@",model);
+}
+
 
 @end

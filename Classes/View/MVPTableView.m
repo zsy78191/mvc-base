@@ -20,9 +20,9 @@
 
 @implementation MVPTableView
 
-- (void)mvc_configMiddleware
+- (void)mvp_configMiddleware
 {
-    [super mvc_configMiddleware];
+    [super mvp_configMiddleware];
 }
 
 

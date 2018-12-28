@@ -66,9 +66,9 @@
 
 #pragma mark - mvc
 
-- (void)mvc_configMiddleware
+- (void)mvp_configMiddleware
 {
-    [super mvc_configMiddleware];
+    [super mvp_configMiddleware];
     MVPTableViewOutput* o = [[MVPTableViewOutput alloc] init];
     [o mvp_registerNib:[UINib nibWithNibName:@"MyCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCell"];
     self.outputMiddleware = o;

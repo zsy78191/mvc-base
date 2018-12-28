@@ -38,9 +38,9 @@
     return self;
 }
 
-- (void)mvc_configMiddleware
+- (void)mvp_configMiddleware
 {
-    [super mvc_configMiddleware];
+    [super mvp_configMiddleware];
     
     if ([self.type isEqualToString:@"collection"]) {
         DCOutput* o = [[DCOutput alloc] init];

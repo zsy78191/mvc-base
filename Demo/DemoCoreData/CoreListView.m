@@ -42,9 +42,9 @@
     return NSClassFromString(@"CorePresenter");
 }
 
-- (void)mvc_configMiddleware
+- (void)mvp_configMiddleware
 {
-    [super mvc_configMiddleware];
+    [super mvp_configMiddleware];
     
     
     MVPTableViewOutput* output = self.outputMiddleware = [[MVPTableViewOutput alloc] init];

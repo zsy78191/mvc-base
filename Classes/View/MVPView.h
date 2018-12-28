@@ -10,6 +10,7 @@
 #import "MVPProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class MVPInitModel;
 @class MVPViewApperance;
 @protocol MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private;
 @interface MVPView : UIViewController <MVPViewProtocol>
@@ -18,15 +19,15 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 @property (nonatomic, strong, readonly) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
-- (void)mvc_configMiddleware NS_REQUIRES_SUPER;
+- (void)mvp_configMiddleware NS_REQUIRES_SUPER;
 - (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString*)name;
 
 #pragma mark - config
 
-- (void)mvc_bindData;
-- (void)mvc_bindAction;
-- (void)mvc_configTable;
-- (void)mvc_configOther;
+- (void)mvp_bindData;
+- (void)mvp_bindAction;
+- (void)mvp_configTable;
+- (void)mvp_configOther;
 
 
 - (void)mvp_bindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
@@ -35,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) __kindof id<MVPOutputProtocol> outputMiddleware;
 @property (nonatomic, strong) __kindof id<MVPInputProtocol> inputMiddleware;
 @property (nonatomic, strong) __kindof MVPViewApperance* apperMiddleware;
+
+- (void)mvp_initFromModel:(MVPInitModel*)model;
 
 - (instancetype)initWithUserInfo:(NSDictionary*)userinfo;
 

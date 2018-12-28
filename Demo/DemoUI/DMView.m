@@ -9,6 +9,7 @@
 #import "DMView.h"
 #import "MVPTableViewOutput.h"
 #import "DMApperance.h"
+#import "MVPInitModel.h"
 @interface DMView ()
 
 @end
@@ -36,9 +37,9 @@
     return NSClassFromString(@"DMPresenter");
 }
 
-- (void)mvc_configMiddleware
+- (void)mvp_configMiddleware
 {
-    [super mvc_configMiddleware];
+    [super mvp_configMiddleware];
     
     MVPTableViewOutput* o = [[MVPTableViewOutput alloc] init];
     self.outputMiddleware = o;
@@ -47,6 +48,12 @@
     [o mvp_registerClass:NSClassFromString(@"MVPContentCell") forCellReuseIdentifier:@"Cell"];
     
     self.apperMiddleware = [[DMApperance alloc] init];
+}
+
+
+- (void)mvp_initFromModel:(MVPInitModel *)model
+{
+    NSLog(@"%@",[model queryProperties]);
 }
 
 /*

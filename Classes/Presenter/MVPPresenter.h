@@ -10,11 +10,12 @@
 #import "MVPProtocol.h"
 #import "MVPRouter.h"
 NS_ASSUME_NONNULL_BEGIN
-
+@class MVPInitModel;
 @interface MVPPresenter : NSObject <MVPPresenterProtocol>
 
 - (Class)routerClass;
 @property (nonatomic, strong) __kindof MVPRouter* router;
+
 
 @end
 

@@ -23,7 +23,7 @@
 //@end
 
 @protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol;
-@class UIViewController;
+@class UIViewController,MVPInitModel;
 
 @protocol MVPModelProtocol <NSObject>
 
@@ -37,6 +37,8 @@
 
 @property (nonatomic, weak) id<MVPViewProtocol> view;
 
+- (void)mvp_initFromModel:(MVPInitModel*)model;
+
 - (void)mvp_bindItem:(id)item propertyName:(NSString *)name keypath:(NSString*)keypath;
 - (void)mvp_bindBlock:(void (^)(id view,id value))block keypath:(NSString*)keypath;
 - (void)mvp_bindChangeBlock:(void (^)(id view,id value,id add,id remove,id modify))block keypath:(NSString*)keypath;
@@ -46,8 +48,10 @@
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath*)path;
 - (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value;
 
+
 @required
 - (id)mvp_inputerWithOutput:(id<MVPOutputProtocol>)output;
+
 
 @end
 
