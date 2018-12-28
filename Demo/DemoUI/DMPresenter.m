@@ -82,9 +82,9 @@
 }
 
 
-- (id)asd
+- (BOOL)asd
 {
-    return @(123);
+    return YES;
 }
 
 @end
