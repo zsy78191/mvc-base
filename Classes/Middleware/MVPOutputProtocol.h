@@ -21,9 +21,10 @@
 
 - (NSUInteger)mvp_addModel:(id<MVPModelProtocol>)model;
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
+- (NSIndexPath*)mvp_indexPathWithModel:(id<MVPModelProtocol>)model;
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath*)path;
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath*)path;
-- (void)mvp_modeModelFromIndexPath:(NSIndexPath*)path1 toPath:(NSIndexPath*)path2;
+- (void)mvp_moveModelFromIndexPath:(NSIndexPath*)path1 toPath:(NSIndexPath*)path2;
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath*)path;
 - (NSUInteger)mvp_count;
 @property (nonatomic, weak) id<MVPOutputProtocol> outputer;

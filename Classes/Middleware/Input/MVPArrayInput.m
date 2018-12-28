@@ -44,7 +44,7 @@
     return 1;
 }
 
-- (void)mvp_modeModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
+- (void)mvp_moveModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
 {
     id obj = [self.table objectAtIndex:path1.row];
     [self.table removeObjectAtIndex:path1.row];
@@ -73,6 +73,11 @@
     return idx;
 }
 
+- (NSIndexPath *)mvp_indexPathWithModel:(id<MVPModelProtocol>)model
+{
+    return [NSIndexPath indexPathForRow:[self.table indexOfObject:model] inSection:0];
+}
+
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path
 {
     NSUInteger idx = [path row];
@@ -83,6 +88,8 @@
     return obj;
     
 }
+
+
 
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath *)path
 {

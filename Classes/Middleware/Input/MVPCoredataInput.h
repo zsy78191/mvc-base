@@ -11,11 +11,11 @@
 #import "MVPOutputProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 @class NSManagedObject;
-@protocol MVPModelProtocol;
+@protocol MVPModelProtocol,NSFetchRequestResult;
 @interface MVPCoredataInput : MVPBaseMiddleware <MVPInputProtocol>
 
 - (Class)mvp_modelClass;
-
+- (NSIndexPath *)mvp_indexPathWithModel:(id<NSFetchRequestResult>)model;
 - (void)loadCoreData:(__kindof NSManagedObject*)obj fromModel:(id<MVPModelProtocol>)model;
 
 @end

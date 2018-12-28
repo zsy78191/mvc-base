@@ -183,8 +183,8 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-    if ([self.inputer respondsToSelector:@selector(mvp_modeModelFromIndexPath:toPath:)]) {
-        [self.inputer mvp_modeModelFromIndexPath:sourceIndexPath toPath:destinationIndexPath];
+    if ([self.inputer respondsToSelector:@selector(mvp_moveModelFromIndexPath:toPath:)]) {
+        [self.inputer mvp_moveModelFromIndexPath:sourceIndexPath toPath:destinationIndexPath];
     }
 }
 

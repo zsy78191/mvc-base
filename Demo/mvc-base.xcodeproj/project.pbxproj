@@ -402,9 +402,9 @@
 		D4616C4421D37D860021F048 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				D4616C4721D37D860021F048 /* MVPCoredataInput.h */,
 				D4616C4521D37D860021F048 /* MVPCoredataInput.m */,
 				D4616C4621D37D860021F048 /* MVPArrayInput.h */,
-				D4616C4721D37D860021F048 /* MVPCoredataInput.h */,
 				D4616C4821D37D860021F048 /* MVPArrayInput.m */,
 			);
 			path = Input;

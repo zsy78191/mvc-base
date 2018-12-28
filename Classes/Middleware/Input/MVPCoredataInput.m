@@ -112,9 +112,14 @@
     return [self.fetch objectAtIndexPath:path];
 }
 
-- (void)mvp_modeModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
+- (void)mvp_moveModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
 {
     
+}
+
+- (NSIndexPath *)mvp_indexPathWithModel:(id<NSFetchRequestResult>)model
+{
+    return [self.fetch indexPathForObject:model];
 }
 
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath*)path { 
