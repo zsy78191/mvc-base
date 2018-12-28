@@ -22,8 +22,8 @@
 {
     [super addSubview:view];
     
-    if ([self.view apperMiddleware]) {
-        [[self.view apperMiddleware] mvp_setupView:view];
+    if ([self.view appear]) {
+        [[self.view appear] mvp_setupView:view];
     }
 }
 

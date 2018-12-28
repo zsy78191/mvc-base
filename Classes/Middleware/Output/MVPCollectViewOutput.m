@@ -25,6 +25,13 @@
     return _delegate;
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.dragHideKeyboard) {
+        [scrollView resignFirstResponder];
+    }
+}
+
 - (id)collectionViewLayout
 {
     return [[UICollectionViewFlowLayout alloc] init];
@@ -215,5 +222,7 @@
 
 
 @synthesize canMove;
+
+@synthesize dragHideKeyboard;
 
 @end

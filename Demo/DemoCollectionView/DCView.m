@@ -38,22 +38,28 @@
     return self;
 }
 
+- (Class)mvp_outputerClass
+{
+    if ([self.type isEqualToString:@"collection"]) {
+        return NSClassFromString(@"DCOutput");
+    }
+    return NSClassFromString(@"MVPCollectViewOutput");
+}
+
 - (void)mvp_configMiddleware
 {
     [super mvp_configMiddleware];
     
     if ([self.type isEqualToString:@"collection"]) {
-        DCOutput* o = [[DCOutput alloc] init];
-        self.outputMiddleware = o;
+        DCOutput* o = self.outputer;
         [o registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CoreCell"];
     }
     else {
-        MVPCollectViewOutput* o = [[MVPCollectViewOutput alloc] init];
-        self.outputMiddleware = o;
+        MVPCollectViewOutput* o = self.outputer;
         [o registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"cell"];
     }
 
-    self.apperMiddleware = [[DCApper alloc] init];
+    self.appear = [[DCApper alloc] init];
     self.empty = [[MVPEmptyMiddleware alloc] init];
 }
 

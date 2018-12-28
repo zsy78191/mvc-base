@@ -65,6 +65,7 @@
 
 @required
 - (Class)mvp_presenterClass;
+- (Class)mvp_outputerClass;
 
 @end
  

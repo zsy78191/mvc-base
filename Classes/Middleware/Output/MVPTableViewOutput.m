@@ -24,6 +24,13 @@
     
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.dragHideKeyboard) {
+        [scrollView resignFirstResponder];
+    }
+}
+
 - (UITableView *)tableview
 {
     if (!_tableview) {
@@ -31,9 +38,28 @@
         table.dataSource = self;
         [table setTableFooterView:[UIView new]];
         [table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        
+        UIRefreshControl *refreshController = [[UIRefreshControl alloc] init];
+
+        self.refreshControl = refreshController;
+
         _tableview = table;
     }
     return _tableview;
+}
+
+- (void)mvp_bindTableRefreshActionName:(NSString *)name
+{
+    [self.refreshControl addTarget:self.presenter action:NSSelectorFromString(name) forControlEvents:UIControlEventValueChanged];
+    [self.tableview addSubview:self.refreshControl];
+}
+
+
+#pragma mark - Handle Refresh Method
+
+-(void)handleRefresh : (id)sender
+{
+    
 }
 
 - (MVPTableViewDelegate *)delegate
@@ -193,8 +219,12 @@
     return self.canMove;
 }
 
+
+
 @synthesize inputer;
 
 @synthesize canMove;
+
+@synthesize dragHideKeyboard;
 
 @end

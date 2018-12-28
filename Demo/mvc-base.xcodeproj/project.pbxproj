@@ -413,9 +413,9 @@
 		D4616C4921D37D860021F048 /* Output */ = {
 			isa = PBXGroup;
 			children = (
+				D4616C4C21D37D860021F048 /* MVPCollectViewOutput.h */,
 				D4616C4A21D37D860021F048 /* MVPCollectViewOutput.m */,
 				D4616C4B21D37D860021F048 /* MVPTableViewOutput.h */,
-				D4616C4C21D37D860021F048 /* MVPCollectViewOutput.h */,
 				D4616C4D21D37D860021F048 /* MVPTableViewOutput.m */,
 			);
 			path = Output;

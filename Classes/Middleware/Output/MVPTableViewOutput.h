@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) MVPTableViewDelegate* delegate;
 
+@property (nonatomic, strong) UIRefreshControl* refreshControl;
+- (void)mvp_bindTableRefreshActionName:(NSString*)name;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END

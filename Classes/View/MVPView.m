@@ -18,9 +18,26 @@
 //#import "MyItem.h"
 @interface MVPView ()
 @property (nonatomic, strong, readwrite) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
+@property (nonatomic, strong, readwrite) id<MVPOutputProtocol> outputer;
 @end
 
 @implementation MVPView
+
+- (Class)mvp_outputerClass
+{
+    return NSClassFromString(@"MVPTableViewOutput");
+}
+
+@synthesize outputer = _outputer;
+
+- (__kindof id<MVPOutputProtocol>)outputer
+{
+    if (!_outputer) {
+        _outputer = [[[self mvp_outputerClass] alloc] init];
+        [(MVPBaseMiddleware*)_outputer setPresenter:self.presenter];
+    }
+    return _outputer;
+}
 
 - (void)mvp_initFromModel:(MVPInitModel *)model
 {
@@ -49,16 +66,16 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     uibase_swizzleMethod([MVPView class], @selector(viewDidLoad), @selector(viewDidLoad_mvcbase));
 }
 
-- (void)setInputMiddleware:(__kindof id<MVPInputProtocol>)inputMiddleware
+- (void)setInputer:(__kindof id<MVPInputProtocol>)inputMiddleware
 {
-    _inputMiddleware = inputMiddleware;
-    [(MVPBaseMiddleware*)_inputMiddleware setPresenter:self.presenter];
+    _inputer = inputMiddleware;
+    [(MVPBaseMiddleware*)_inputer setPresenter:self.presenter];
 }
 
-- (void)setOutputMiddleware:(__kindof id<MVPOutputProtocol>)outputMiddleware
+- (void)setOutputer:(__kindof id<MVPOutputProtocol>)outputMiddleware
 {
-    _outputMiddleware = outputMiddleware;
-    [(MVPBaseMiddleware*)_outputMiddleware setPresenter:self.presenter];
+    _outputer = outputMiddleware;
+    [(MVPBaseMiddleware*)_outputer setPresenter:self.presenter];
 }
 
 
@@ -100,8 +117,8 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     
     self.view.tag = MVPViewTagContentView;
     
-    if (self.apperMiddleware) {
-        [self.apperMiddleware mvp_setupView:self.view];
+    if (self.appear) {
+        [self.appear mvp_setupView:self.view];
     }
 }
 
@@ -118,8 +135,8 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
-    if ([self.outputMiddleware respondsToSelector:@selector(setEditing:animated:)]) {
-        [self.outputMiddleware setEditing:editing animated:animated];
+    if ([self.outputer respondsToSelector:@selector(setEditing:animated:)]) {
+        [self.outputer setEditing:editing animated:animated];
     }
     
 }

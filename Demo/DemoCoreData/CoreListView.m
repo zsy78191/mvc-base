@@ -42,13 +42,17 @@
     return NSClassFromString(@"CorePresenter");
 }
 
+- (Class)mvp_outputerClass
+{
+    return NSClassFromString(@"MVPTableViewOutput");
+}
+
 - (void)mvp_configMiddleware
 {
     [super mvp_configMiddleware];
     
-    
-    MVPTableViewOutput* output = self.outputMiddleware = [[MVPTableViewOutput alloc] init];
-    [output mvp_registerClass:NSClassFromString(@"CoreCell") forCellReuseIdentifier:@"CoreCell"];
+    MVPTableViewOutput* o = self.outputer;
+    [o mvp_registerClass:NSClassFromString(@"CoreCell") forCellReuseIdentifier:@"CoreCell"];
     
     self.empty = [[MVPEmptyMiddleware alloc] init];
 }

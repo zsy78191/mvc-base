@@ -37,17 +37,20 @@
     return NSClassFromString(@"DMPresenter");
 }
 
+- (Class)mvp_outputerClass
+{
+    return NSClassFromString(@"MVPTableViewOutput");
+}
+
 - (void)mvp_configMiddleware
 {
     [super mvp_configMiddleware];
     
-    MVPTableViewOutput* o = [[MVPTableViewOutput alloc] init];
-    self.outputMiddleware = o;
-    
+    MVPTableViewOutput* o = self.outputer;
     [o mvp_registerNib:[UINib nibWithNibName:@"AppTitleCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"AppTitleCell"];
     [o mvp_registerClass:NSClassFromString(@"MVPContentCell") forCellReuseIdentifier:@"Cell"];
     
-    self.apperMiddleware = [[DMApperance alloc] init];
+    self.appear = [[DMApperance alloc] init];
 }
 
 

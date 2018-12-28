@@ -33,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mvp_bindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
 - (void)mvp_unbindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
 
-@property (nonatomic, strong) __kindof id<MVPOutputProtocol> outputMiddleware;
-@property (nonatomic, strong) __kindof id<MVPInputProtocol> inputMiddleware;
-@property (nonatomic, strong) __kindof MVPViewApperance* apperMiddleware;
+@property (nonatomic, strong, readonly) id<MVPOutputProtocol> outputer;
+@property (nonatomic, strong) id<MVPInputProtocol> inputer;
+@property (nonatomic, strong) __kindof MVPViewApperance* appear;
 
 - (void)mvp_initFromModel:(MVPInitModel*)model;
 

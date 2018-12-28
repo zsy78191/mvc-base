@@ -64,19 +64,22 @@
     return NSClassFromString(@"MyPresenter");
 }
 
+- (Class)mvp_outputerClass
+{
+    return NSClassFromString(@"MVPTableViewOutput");
+}
+
 #pragma mark - mvc
 
 - (void)mvp_configMiddleware
 {
     [super mvp_configMiddleware];
-    MVPTableViewOutput* o = [[MVPTableViewOutput alloc] init];
+    MVPTableViewOutput* o = self.outputer;
     [o mvp_registerNib:[UINib nibWithNibName:@"MyCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCell"];
-    self.outputMiddleware = o;
     [o setCanMove:YES];
-    
+    [o mvp_bindTableRefreshActionName:@"refreshData:"];
     self.empty = [[MyEmpty alloc] init];
 }
-
 
 #pragma mark - lazy
 

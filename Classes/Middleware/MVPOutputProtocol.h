@@ -44,6 +44,7 @@
 - (__kindof UIView*)outputView;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;
 @property (nonatomic, assign) BOOL canMove;
+@property (nonatomic, assign) BOOL dragHideKeyboard;
 
 - (void)beginUpdates;
 - (void)endUpdates;

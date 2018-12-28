@@ -34,14 +34,14 @@
     [super viewDidLoad];
     
     if ([self.presenter respondsToSelector:@selector(mvp_inputerWithOutput:)]) {
-         self.inputMiddleware = [self.presenter mvp_inputerWithOutput:self.outputMiddleware];
+         self.inputer = [self.presenter mvp_inputerWithOutput:self.outputer];
     }
     else {
         NSLog(@"warning %@ did not has selector [mvp_inputerWithOutput:]",self.presenter);
     }
     
-    if (self.outputMiddleware) {
-        __kindof UIView* v = [self.outputMiddleware outputView];
+    if (self.outputer) {
+        __kindof UIView* v = [self.outputer outputView];
         if ([v isKindOfClass:[UITableView class]] || [v isKindOfClass:[UICollectionView class]]) {
             self.manageView = v;
         }
@@ -54,13 +54,13 @@
         label.center = self.view.center;
     }
     
-    if (self.inputMiddleware) {
-        self.outputMiddleware.inputer = self.inputMiddleware;
-        self.inputMiddleware.outputer = self.outputMiddleware;
+    if (self.inputer) {
+        self.outputer.inputer = self.inputer;
+        self.inputer.outputer = self.outputer;
     }
     
     if (self.empty) {
-        [self.outputMiddleware setEmpty:self.empty];
+        [self.outputer setEmpty:self.empty];
     }
     
 //    NSLog(@"%s",__func__);
@@ -78,6 +78,8 @@
     [super viewDidLayoutSubviews];
     [self.manageView setFrame:self.view.bounds];
 }
+
+
 
 
 
