@@ -10,4 +10,11 @@
 
 @implementation MVPCollectionViewDelegate
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.dragHideKeyboard) {
+        [scrollView resignFirstResponder];
+    }
+}
+
 @end

@@ -30,6 +30,9 @@
         v.navigationItem.rightBarButtonItem.title = [NSString stringWithFormat:@"修改 %@",value];
     } keypath:@"testCount"];
     
+    
+    id x = [[self presenter] mvp_valueWithSelectorName:@"asd"];
+    NSLog(@"%@",x);
 }
 
 - (Class)mvp_presenterClass
@@ -49,7 +52,7 @@
     MVPTableViewOutput* o = self.outputer;
     [o mvp_registerNib:[UINib nibWithNibName:@"AppTitleCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"AppTitleCell"];
     [o mvp_registerClass:NSClassFromString(@"MVPContentCell") forCellReuseIdentifier:@"Cell"];
-    
+    [o setDragHideKeyboard:YES];
     self.appear = [[DMApperance alloc] init];
 }
 

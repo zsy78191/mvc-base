@@ -22,6 +22,13 @@
     }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.dragHideKeyboard) {
+        [scrollView endEditing:YES];
+    }
+}
+
 - (void)dealloc
 {
     NSLog(@"%@ %s",[self class],__func__);

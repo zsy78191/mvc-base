@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MVPCollectionViewDelegate : MVPBaseMiddleware <UICollectionViewDelegate>
 
+@property (nonatomic, assign) BOOL dragHideKeyboard;
+
 @end
 
 NS_ASSUME_NONNULL_END

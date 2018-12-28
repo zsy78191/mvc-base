@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MVPTableViewDelegate : MVPBaseMiddleware <UITableViewDelegate>
 
+@property (nonatomic, assign) BOOL dragHideKeyboard;
+
 @end
 
 NS_ASSUME_NONNULL_END

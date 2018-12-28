@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MVPModel : NSObject <MVPModelProtocol>
 
+- (BOOL)same:(id)v1 with:(id)v2;
+
 @end
 
 NS_ASSUME_NONNULL_END

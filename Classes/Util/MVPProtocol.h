@@ -23,12 +23,14 @@
 //@end
 
 @protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol;
-@class UIViewController,MVPInitModel;
+@class UIViewController,MVPInitModel,NSManagedObject;
 
 @protocol MVPModelProtocol <NSObject>
 
 - (NSArray *)propertys;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;
+- (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model;
+- (BOOL)mvp_sameWithCoreDataModel:(__kindof NSManagedObject*)model;
 
 @end
 
@@ -42,6 +44,7 @@
 - (void)mvp_bindItem:(id)item propertyName:(NSString *)name keypath:(NSString*)keypath;
 - (void)mvp_bindBlock:(void (^)(id view,id value))block keypath:(NSString*)keypath;
 - (void)mvp_bindChangeBlock:(void (^)(id view,id value,id add,id remove,id modify))block keypath:(NSString*)keypath;
+- (id)mvp_valueWithSelectorName:(NSString*)name;
 
 
 #pragma mark - action

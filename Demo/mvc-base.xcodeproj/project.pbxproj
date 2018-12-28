@@ -377,14 +377,14 @@
 			isa = PBXGroup;
 			children = (
 				D4616C4021D37D860021F048 /* UI */,
-				D4616C4321D37D860021F048 /* MVPEmptyMiddleware.h */,
 				D4616C4421D37D860021F048 /* Input */,
 				D4616C4921D37D860021F048 /* Output */,
 				D4616C4E21D37D860021F048 /* Delegate */,
-				D4616C5321D37D860021F048 /* MVPBaseMiddleware.h */,
+				D4616C4321D37D860021F048 /* MVPEmptyMiddleware.h */,
 				D4616C5421D37D860021F048 /* MVPEmptyMiddleware.m */,
-				D4616C5521D37D860021F048 /* MVPViewApperanceProtocol.h */,
+				D4616C5321D37D860021F048 /* MVPBaseMiddleware.h */,
 				D4616C5621D37D860021F048 /* MVPBaseMiddleware.m */,
+				D4616C5521D37D860021F048 /* MVPViewApperanceProtocol.h */,
 				D4616C5721D37D860021F048 /* MVPOutputProtocol.h */,
 			);
 			path = Middleware;
@@ -424,9 +424,9 @@
 		D4616C4E21D37D860021F048 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				D4616C5121D37D860021F048 /* MVPCollectionViewDelegate.h */,
 				D4616C4F21D37D860021F048 /* MVPCollectionViewDelegate.m */,
 				D4616C5021D37D860021F048 /* MVPTableViewDelegate.h */,
-				D4616C5121D37D860021F048 /* MVPCollectionViewDelegate.h */,
 				D4616C5221D37D860021F048 /* MVPTableViewDelegate.m */,
 			);
 			path = Delegate;

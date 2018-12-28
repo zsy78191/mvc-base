@@ -24,12 +24,7 @@
     
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    if (self.dragHideKeyboard) {
-        [scrollView resignFirstResponder];
-    }
-}
+
 
 - (UITableView *)tableview
 {
@@ -73,6 +68,10 @@
 - (UIView *)outputView
 {
     self.tableview.delegate = self.delegate;
+    self.delegate.dragHideKeyboard = self.dragHideKeyboard;
+    if (self.dragHideKeyboard) {
+//        [self.tableview setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
+    }
     self.delegate.presenter = self.presenter;
     return self.tableview;
 }

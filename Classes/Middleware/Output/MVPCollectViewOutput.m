@@ -28,7 +28,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if (self.dragHideKeyboard) {
-        [scrollView resignFirstResponder];
+        [scrollView endEditing:YES];
     }
 }
 
@@ -158,6 +158,7 @@
 - (__kindof UIView *)outputView {
     
     self.collectionView.delegate = self.delegate;
+    self.delegate.dragHideKeyboard = self.dragHideKeyboard;
     self.delegate.presenter = self.presenter;
     return self.collectionView;
 }

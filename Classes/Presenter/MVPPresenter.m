@@ -183,4 +183,16 @@
     return self;
 }
 
+- (id)mvp_valueWithSelectorName:(NSString *)name
+{
+    if ([self respondsToSelector:NSSelectorFromString(name)]) {
+        SEL s = NSSelectorFromString(name);
+        IMP imp = [self methodForSelector:s];
+        id (*func)(id, SEL) = (void *)imp;
+        return func(self, s);
+    }
+    NSLog(@"%@'s selector [%@] unexist",self,name);
+    return nil;
+}
+
 @end
