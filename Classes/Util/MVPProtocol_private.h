@@ -15,6 +15,7 @@
 - (void)mvp_registActionName:(NSString*)name item:(id)item;
 - (void)mvp_removeActionForItem:(id)item;
 - (void)mvp_runAction:(NSString*)actionName;
+- (void)mvp_runAction:(NSString*)actionName value:(id)value;
 
 
 @end

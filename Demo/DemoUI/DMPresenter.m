@@ -81,10 +81,15 @@
     NSLog(@"%@",model);
 }
 
-
-- (BOOL)asd
+- (void)actionBtn:(id)sender
 {
-    return YES;
+    NSLog(@"%@",sender);
+}
+
+
+- (id)asd
+{
+    return @(YES);
 }
 
 @end

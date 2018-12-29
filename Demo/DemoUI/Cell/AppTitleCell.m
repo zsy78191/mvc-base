@@ -29,7 +29,7 @@
     UITapGestureRecognizer* t = [[UITapGestureRecognizer alloc] init];
     [self.icon addGestureRecognizer:t];
     [self mvp_bindGesture:t];
-    [self mvp_bindAction:UIControlEventTouchUpInside target:self.infoBtn actionName:@"actionBtn"];
+    [self mvp_bindAction:UIControlEventTouchUpInside target:self.infoBtn actionName:@"actionBtn:"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

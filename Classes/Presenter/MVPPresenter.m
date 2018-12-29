@@ -118,6 +118,19 @@
     [self mvp_runAction:action];
 }
 
+- (void)mvp_runAction:(NSString*)actionName value:(id)value;
+{
+    SEL s = NSSelectorFromString(actionName);
+    if ([self respondsToSelector:s]) {
+        IMP imp = [self methodForSelector:s];
+        void (*func)(id, SEL, id) = (void *)imp;
+        func(self, s, value);
+    }
+    else{
+        NSLog(@"%@'s selector [%@] unexist",self,actionName);
+    }
+}
+
 - (void)mvp_runAction:(NSString*)actionName;
 {
     SEL s = NSSelectorFromString(actionName);
@@ -186,14 +199,10 @@
 - (id)mvp_valueWithSelectorName:(NSString *)name
 {
     if ([self respondsToSelector:NSSelectorFromString(name)]) {
-//        SEL s = NSSelectorFromString(name);
-//        IMP imp = [self methodForSelector:s];
-//        id (*func)(id, SEL) = (void *)imp;
-//        return func(self, s);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        return [self performSelector: NSSelectorFromString(name)];
-#pragma clang diagnostic pop
+        SEL s = NSSelectorFromString(name);
+        IMP imp = [self methodForSelector:s];
+        id (*func)(id, SEL) = (void *)imp;
+        return func(self, s);
     }
     NSLog(@"%@'s selector [%@] unexist",self,name);
     return nil;

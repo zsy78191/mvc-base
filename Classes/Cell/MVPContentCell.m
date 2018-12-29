@@ -146,9 +146,9 @@
     while(s){
         RACDisposable* d =  [s subscribeNext:^(id  _Nullable x) {
             if ([x isKindOfClass:[RACTuple class]]) {
-//                id value = x[0];
+                id value = x[0];
                 NSString* actionName = x[1];
-                [presenter mvp_runAction:actionName];
+                [presenter mvp_runAction:actionName value:value];
             }
             else {
                 if ([presenter respondsToSelector:@selector(mvp_action_withModel:value:)]) {
