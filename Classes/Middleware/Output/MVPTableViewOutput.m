@@ -67,12 +67,12 @@
 
 - (UIView *)outputView
 {
-    self.tableview.delegate = self.delegate;
-    self.delegate.dragHideKeyboard = self.dragHideKeyboard;
-    if (self.dragHideKeyboard) {
+    self.tableview.delegate = self;
+//    self.delegate.dragHideKeyboard = self.dragHideKeyboard;
+//    if (self.dragHideKeyboard) {
 //        [self.tableview setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
-    }
-    self.delegate.presenter = self.presenter;
+//    }
+//    self.delegate.presenter = self.presenter;
     return self.tableview;
 }
 
@@ -216,6 +216,27 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return self.canMove;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //    [self.presenter ]
+    //    if ([self.presenter ]) {
+    
+    //    }
+    if ([self.presenter respondsToSelector:@selector(mvp_action_selectItemAtIndexPath:)]) {
+        [self.presenter mvp_action_selectItemAtIndexPath:indexPath];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.dragHideKeyboard) {
+        [scrollView endEditing:YES];
+    }
 }
 
 

@@ -366,7 +366,7 @@
 				D4616C6021D37D860021F048 /* Cell */,
 				D4616C6421D37D860021F048 /* Model */,
 				D4616C6921D37D860021F048 /* View */,
-				D4616C7021D37D860021F048 /* New Group */,
+				D4616C7021D37D860021F048 /* Subview */,
 				D4616C7321D37D860021F048 /* Router */,
 			);
 			name = Classes;
@@ -488,13 +488,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		D4616C7021D37D860021F048 /* New Group */ = {
+		D4616C7021D37D860021F048 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
 				D4616C7121D37D860021F048 /* MVPSubView.m */,
 				D4616C7221D37D860021F048 /* MVPSubView.h */,
 			);
-			path = "New Group";
+			path = Subview;
 			sourceTree = "<group>";
 		};
 		D4616C7321D37D860021F048 /* Router */ = {
