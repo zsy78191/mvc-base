@@ -37,6 +37,12 @@
     return [[UICollectionViewFlowLayout alloc] init];
 }
 
+
+- (void)deleteAll
+{
+    [self.collectionView reloadData];
+}
+
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {

@@ -148,6 +148,11 @@
 }
 
 
+- (void)deleteAll
+{
+    [self.tableview reloadData];
+}
+
 - (void)insertSectionAtIndex:(NSUInteger)idx {
     [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self updataEmpty];

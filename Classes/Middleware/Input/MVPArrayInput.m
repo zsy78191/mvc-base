@@ -90,6 +90,12 @@
 }
 
 
+- (void)mvp_cleanAll
+{
+    [self.table removeAllObjects];
+    [self.outputer deleteAll];
+}
+
 
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath *)path
 {

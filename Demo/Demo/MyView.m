@@ -32,7 +32,9 @@
     [item setTitle:@"添加"];
     UIBarButtonItem* item2 = [self mvp_buttonItemWithActionName:@"openCore"];
     [item2 setTitle:@"Coredata"];
-    self.navigationItem.rightBarButtonItems = @[item,self.editButtonItem];
+    UIBarButtonItem* item6 = [self mvp_buttonItemWithActionName:@"cleanAll"];
+    [item6 setTitle:@"全部删除"];
+    self.navigationItem.rightBarButtonItems = @[item,self.editButtonItem,item6];
  
     UIBarButtonItem* item3 = [self mvp_buttonItemWithActionName:@"openUI"];
     [item3 setTitle:@"列表视图UI"];

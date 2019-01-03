@@ -44,6 +44,11 @@
     [self.mainInput mvp_addModel:m];
 }
 
+- (void)cleanAll
+{
+    [self.mainInput mvp_cleanAll];
+}
+
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath *)path
 {
     [self.mainInput mvp_deleteModelAtIndexPath:path];

@@ -117,6 +117,11 @@
     
 }
 
+- (void)mvp_cleanAll
+{
+    NSLog(@"%s 不能使用",__func__);
+}
+
 - (NSIndexPath *)mvp_indexPathWithModel:(id<NSFetchRequestResult>)model
 {
     return [self.fetch indexPathForObject:model];

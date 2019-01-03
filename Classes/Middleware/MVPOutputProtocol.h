@@ -25,6 +25,7 @@
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath*)path;
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath*)path;
 - (void)mvp_moveModelFromIndexPath:(NSIndexPath*)path1 toPath:(NSIndexPath*)path2;
+- (void)mvp_cleanAll;
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath*)path;
 - (NSUInteger)mvp_count;
 @property (nonatomic, weak) id<MVPOutputProtocol> outputer;
@@ -55,6 +56,8 @@
 - (void)insertAtIndexPaths:(NSArray*)paths;
 - (void)deleleAtIndexPaths:(NSArray*)paths;
 - (void)updateAtIndexPaths:(NSArray*)paths;
+
+- (void)deleteAll;
 
 - (void)insertSectionAtIndex:(NSUInteger)idx;
 - (void)deleteSectionAtIndex:(NSUInteger)idx;
