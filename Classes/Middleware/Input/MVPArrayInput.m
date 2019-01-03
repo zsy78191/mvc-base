@@ -84,14 +84,27 @@
     id obj = [self.table objectAtIndex:idx];
     [self.table removeObjectAtIndex:idx];
     [self.outputer deleleAtIndexPath:path];
-    [(id)obj setInputer:nil];
+    [obj setInputer:nil];
+    if ([obj respondsToSelector:@selector(removeFromInputer)]) {
+        [obj removeFromInputer];
+    }
     return obj;
+}
+
+- (void)removeFromInputer
+{
     
 }
 
 
 - (void)mvp_cleanAll
 {
+    [self.table enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setInputer:nil];
+        if ([obj respondsToSelector:@selector(removeFromInputer)]) {
+            [obj removeFromInputer];
+        }
+    }];
     [self.table removeAllObjects];
     [self.outputer deleteAll];
 }

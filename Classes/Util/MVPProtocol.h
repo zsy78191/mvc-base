@@ -32,6 +32,8 @@
 - (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model;
 - (BOOL)mvp_sameWithCoreDataModel:(__kindof NSManagedObject*)model;
 
+- (void)removeFromInputer;
+
 @end
 
 @protocol MVPPresenterProtocol <NSObject>

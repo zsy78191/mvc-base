@@ -91,6 +91,11 @@
     return YES;
 }
 
+- (void)removeFromInputer
+{
+    
+}
+
 @synthesize inputer;
 
 @end
