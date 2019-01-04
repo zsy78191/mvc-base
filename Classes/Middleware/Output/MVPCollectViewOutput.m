@@ -11,7 +11,7 @@
 #import "MVPModel.h"
 #import "MVPOutputProtocol.h"
 @import DZNEmptyDataSet;
-@interface MVPCollectViewOutput () <UICollectionViewDataSource>
+@interface MVPCollectViewOutput () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (nonatomic, strong) UICollectionView* collectionView;
 @end
 
@@ -56,6 +56,8 @@
     }
     return _collectionView;
 }
+
+
 
 - (void)onLongPressed:(UILongPressGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:sender.view];
@@ -163,11 +165,26 @@
 
 - (__kindof UIView *)outputView {
     
-    self.collectionView.delegate = self.delegate;
+    self.collectionView.delegate = self;
     self.delegate.dragHideKeyboard = self.dragHideKeyboard;
     self.delegate.presenter = self.presenter;
     return self.collectionView;
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.presenter respondsToSelector:@selector(mvp_action_selectItemAtIndexPath:)]) {
+        [self.presenter mvp_action_selectItemAtIndexPath:indexPath];
+    }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (self.dragHideKeyboard) {
+        [scrollView resignFirstResponder];
+    }
+}
+
 
 - (void)setEmpty:(__kindof MVPEmptyMiddleware *)empty {
     [self.collectionView setEmptyDataSetSource:empty];
