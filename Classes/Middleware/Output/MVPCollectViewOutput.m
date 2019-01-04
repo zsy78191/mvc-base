@@ -48,11 +48,11 @@
     if (!_collectionView) {
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[self collectionViewLayout]];
         _collectionView.dataSource = self;
-        
-        self.collectionView.pagingEnabled = NO;
+        [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        _collectionView.pagingEnabled = NO;
         
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPressed:)];
-        [self.collectionView addGestureRecognizer:longPress];
+        [_collectionView addGestureRecognizer:longPress];
     }
     return _collectionView;
 }
@@ -205,12 +205,12 @@
  
 }
 
-- (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)mvp_registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 {
     [self.collectionView registerClass:cellClass forCellWithReuseIdentifier:identifier];
 }
 
-- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)mvp_registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
 {
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:identifier];
 }

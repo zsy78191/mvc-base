@@ -52,11 +52,11 @@
     
     if ([self.type isEqualToString:@"collection"]) {
         DCOutput* o = self.outputer;
-        [o registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CoreCell"];
+        [o mvp_registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CoreCell"];
     }
     else {
         MVPCollectViewOutput* o = self.outputer;
-        [o registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"cell"];
+        [o mvp_registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"cell"];
     }
 
     self.appear = [[DCApper alloc] init];

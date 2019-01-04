@@ -18,8 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) MVPCollectionViewDelegate* delegate;
 
-- (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
-- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)mvp_registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)mvp_registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
 
 
 @end
