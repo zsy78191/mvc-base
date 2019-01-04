@@ -43,10 +43,15 @@
     [self.collectionView reloadData];
 }
 
+- (Class)collectionViewClass
+{
+    return [UICollectionView class];
+}
+
 - (UICollectionView *)collectionView
 {
     if (!_collectionView) {
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:[self collectionViewLayout]];
+        _collectionView = [[[self collectionViewClass] alloc] initWithFrame:CGRectZero collectionViewLayout:[self collectionViewLayout]];
         _collectionView.dataSource = self;
         [_collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
         _collectionView.pagingEnabled = NO;
@@ -177,14 +182,6 @@
         [self.presenter mvp_action_selectItemAtIndexPath:indexPath];
     }
 }
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    if (self.dragHideKeyboard) {
-        [scrollView resignFirstResponder];
-    }
-}
-
 
 - (void)setEmpty:(__kindof MVPEmptyMiddleware *)empty {
     [self.collectionView setEmptyDataSetSource:empty];

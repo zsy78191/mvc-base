@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mvp_registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 - (void)mvp_registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
 
+- (Class)collectionViewClass;
+
 
 @end
 
