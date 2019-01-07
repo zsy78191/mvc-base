@@ -18,7 +18,7 @@
     
 }
 @property (nonatomic, strong) MainInput* mainInput;
-
+@property (nonatomic, strong) NSString* testString;
 @end
 
 @implementation MyPresenter
@@ -86,6 +86,33 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [control endRefreshing];
     });
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"%@",@(animated));
+}
+
+- (void)mvp_gestrue:(__kindof UIGestureRecognizer *)gesture
+{
+    NSLog(@"%@",gesture);
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+//        [self.router regiestTarget:self selector:@selector(testString) asRouter:@"demo://getTestString"];
+        self.testString = @"123";
+        
+        
+    }
+    return self;
+}
+
+- (void)testRouterURL
+{
+    NSLog(@"%@",[self.router valueForRouterURL:@"demo://getTestString2"]);
 }
 
 @end

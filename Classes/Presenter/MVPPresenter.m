@@ -58,6 +58,7 @@
 
 - (id)mvp_inputerWithOutput:(id<MVPOutputProtocol>)output
 {
+    NSLog(@"warning %@ didn't response %s",self,__func__);
     return nil;
 }
 
@@ -156,17 +157,17 @@
 
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath *)path
 {
-    
+    NSLog(@"warning %@ didn't response %s",self,__func__);
 }
 
 - (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value
 {
-    
+    NSLog(@"warning %@ didn't response %s",self,__func__);
 }
 
 - (void)mvp_initFromModel:(id)model
 {
-    
+    NSLog(@"warning %@ didn't response %s",self,__func__);
 }
 
 
@@ -206,6 +207,16 @@
     }
     NSLog(@"%@'s selector [%@] unexist",self,name);
     return nil;
+}
+
+- (void)mvp_gestrue:(__kindof UIGestureRecognizer *)gesture
+{
+    NSLog(@"warning %@ didn't response %s",self,__func__);
+}
+
+- (void)mvp_gestrue:(__kindof UIGestureRecognizer *)gesture model:(id<MVPModelProtocol>)model
+{
+    NSLog(@"warning %@ didn't response %s",self,__func__);
 }
 
 @end

@@ -41,20 +41,29 @@
     self.navigationItem.leftBarButtonItem = item3;
     
     UIBarButtonItem* item4 = [self mvp_buttonItemWithActionName:@"openCollectionView:"];
-    [item4 setTitle:@"CollectionView"];
+    [item4 setTitle:@"C测试"];
     
     UIBarButtonItem* item5 = [self mvp_buttonItemWithActionName:@"openCore2"];
-    [item5 setTitle:@"CollectionViewCore"];
+    [item5 setTitle:@"CC测试"];
     
-    self.toolbarItems = @[item4,item2,item5];
+   
     
     [[self navigationController] setToolbarHidden:NO];
+    
+    [self mvp_bindSelector:@selector(viewWillAppear:)];
+    
+    
+    UIBarButtonItem* item7 = [self mvp_buttonItemWithActionName:@"testRouterURL"];
+    item7.title = @"router测试";
+     self.toolbarItems = @[item4,item2,item5,item7];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
 }
+
+
 
 - (void)dealloc
 {
@@ -81,6 +90,13 @@
     [o setCanMove:YES];
     [o mvp_bindTableRefreshActionName:@"refreshData:"];
     self.empty = [[MyEmpty alloc] init];
+}
+
+- (void)mvp_bindAction
+{
+    UILongPressGestureRecognizer* l = [[UILongPressGestureRecognizer alloc] initWithTarget:nil action:nil];
+    [[self view] addGestureRecognizer:l];
+    [self mvp_bindGesture:l];
 }
 
 #pragma mark - lazy

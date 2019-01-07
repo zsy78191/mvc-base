@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mvp_bindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
 - (void)mvp_unbindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
+- (void)mvp_bindSelector:(SEL)selector;
+- (void)mvp_bindGesture:(__kindof UIGestureRecognizer*)gesture;
 
 @property (nonatomic, strong, readonly) id<MVPOutputProtocol> outputer;
 @property (nonatomic, strong) id<MVPInputProtocol> inputer;

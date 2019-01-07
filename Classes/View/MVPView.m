@@ -223,5 +223,31 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     [self.presenter mvp_removeActionForItem:target];
 }
 
+- (void)mvp_bindGesture:(__kindof UIGestureRecognizer *)gesture
+{
+    id<MVPPresenterProtocol> presenter = self.presenter;
+    [[[gesture rac_gestureSignal] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(__kindof UIGestureRecognizer * _Nullable x) {
+        if ([presenter respondsToSelector:@selector(mvp_gestrue:)]) {
+            [presenter mvp_gestrue:x];
+        }
+    }];
+}
+
+- (void)mvp_bindSelector:(SEL)selector
+{
+    [[self rac_signalForSelector:selector] subscribeNext:^(RACTuple * _Nullable x) {
+        if ([self.presenter respondsToSelector:selector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+            [self.presenter performSelector:selector withObject:x];
+#pragma clang diagnostic pop
+        }
+        else
+        {
+            NSLog(@"warning presenter %@ didn't have selector named %@",self.presenter,NSStringFromSelector(selector));
+        }
+    }];
+}
+
 
 @end

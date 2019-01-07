@@ -145,10 +145,17 @@
     s = [[s takeUntil:[self rac_signalForSelector:@selector(prepareForReuse)]] takeUntil:[self rac_willDeallocSignal]];
     while(s){
         RACDisposable* d =  [s subscribeNext:^(id  _Nullable x) {
+       
             if ([x isKindOfClass:[RACTuple class]]) {
                 id value = x[0];
                 NSString* actionName = x[1];
                 [presenter mvp_runAction:actionName value:value];
+            }
+            else if([x isKindOfClass:[UIGestureRecognizer class]])
+            {
+                if ([presenter respondsToSelector:@selector(mvp_gestrue:model:)]) {
+                    [presenter mvp_gestrue:x model:model];
+                }
             }
             else {
                 if ([presenter respondsToSelector:@selector(mvp_action_withModel:value:)]) {

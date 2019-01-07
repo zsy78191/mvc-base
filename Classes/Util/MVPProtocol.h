@@ -23,7 +23,7 @@
 //@end
 
 @protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol;
-@class UIViewController,MVPInitModel,NSManagedObject;
+@class UIViewController,MVPInitModel,NSManagedObject,UIGestureRecognizer;
 
 @protocol MVPModelProtocol <NSObject>
 
@@ -49,10 +49,15 @@
 - (id)mvp_valueWithSelectorName:(NSString*)name;
 
 
+#pragma mark - action for mvpview
+- (void)mvp_gestrue:(__kindof UIGestureRecognizer*)gesture;
+
 #pragma mark - action
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath*)path;
-- (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value;
 
+#pragma mark - action for contentCell
+- (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value;
+- (void)mvp_gestrue:(__kindof UIGestureRecognizer*)gesture model:(id<MVPModelProtocol>)model;
 
 @required
 - (id)mvp_inputerWithOutput:(id<MVPOutputProtocol>)output;

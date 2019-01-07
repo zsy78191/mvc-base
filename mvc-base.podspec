@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "mvc-base"
-  s.version      = "0.1.9"
+  s.version      = "0.2.0"
   s.summary      = "自用代码库MVC框架"
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-  自用代码库MVC框架
+  准确的说是MVP框架，带有侵入性的封装了UIViewController。将软件构架拆分为View(UIView和UIViewController),Presenter(业务角色),Middleware（中间件）和Model（模型），并自带一个简单的Router（路由），比VIPER要简单一点，重发代码少。
                    DESC
 
   s.homepage     = "https://github.com/zsy78191/mvc-base"

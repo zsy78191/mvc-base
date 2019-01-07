@@ -491,8 +491,8 @@
 		D4616C7021D37D860021F048 /* Subview */ = {
 			isa = PBXGroup;
 			children = (
-				D4616C7121D37D860021F048 /* MVPSubView.m */,
 				D4616C7221D37D860021F048 /* MVPSubView.h */,
+				D4616C7121D37D860021F048 /* MVPSubView.m */,
 			);
 			path = Subview;
 			sourceTree = "<group>";

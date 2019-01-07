@@ -50,8 +50,21 @@
         [self.inputer mvp_addModel:m];
         
         self.testCount = 0;
+        
+        [self.router regiestTarget:self selector:@selector(testString) asStaticRouter:@"demo://getTestString2"];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    
+}
+
+- (NSString*)testString
+{
+
+    return @"321";
 }
 
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath *)path
@@ -62,7 +75,7 @@
 - (void)mvp_action_withModel:(id<MVPModelProtocol>)model value:(id)value
 {
     if ([model isKindOfClass:[AppInfoModel class]]) {
-//        NSLog(@"%@",value);
+        NSLog(@"%@",value);
     }
 }
 
@@ -84,7 +97,14 @@
 - (void)actionBtn:(id)sender
 {
     NSLog(@"%@",sender);
+    NSLog(@"%@",[self.router valueForRouterURL:@"demo://getTestString2"]);
 }
+
+- (void)mvp_gestrue:(__kindof UIGestureRecognizer *)gesture model:(id<MVPModelProtocol>)model
+{
+    NSLog(@"%@",gesture);
+}
+
 
 
 - (id)asd
