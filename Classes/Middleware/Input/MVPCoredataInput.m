@@ -10,6 +10,7 @@
 //#import "Account+CoreDataProperties.h"
 @import CoreData;
 @import MagicalRecord;
+@import oc_string;
 #import "MVPProtocol.h"
 @interface MVPCoredataInput() <NSFetchedResultsControllerDelegate>
 {
@@ -50,7 +51,7 @@
         }
         
         
-        self.fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:r managedObjectContext:[NSManagedObjectContext MR_defaultContext] sectionNameKeyPath:nil cacheName:nil];
+        self.fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:r managedObjectContext:[NSManagedObjectContext MR_defaultContext] sectionNameKeyPath:[self sectionKeyPath] cacheName:nil];
         
         [self.fetch setDelegate:self];
         
@@ -61,10 +62,16 @@
 //        NSLog(@"%@",self.fetch);
 //        NSLog(@"%@",[self.fetch fetchedObjects]);
 //        NSLog(@"%@",@([info numberOfObjects]));
+        self.complexSection = 0;
         
         
     }
     return self;
+}
+
+- (NSString*)sectionKeyPath
+{
+    return nil;
 }
 
 - (id<MVPModelProtocol>)dataAtIndex:(NSUInteger)idx { 
@@ -90,7 +97,13 @@
 }
 
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path{
-    __kindof NSManagedObject* o = [self.fetch objectAtIndexPath:path];
+    __kindof NSManagedObject* o  = nil;
+    if (self.complexSection != 0 && path.section > 0) {
+        o = [self.fetch objectAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0]];
+    }
+    else {
+        o = [self.fetch objectAtIndexPath:path];
+    }
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext * _Nonnull localContext) {
         NSManagedObject* o2 = [o MR_inContext:localContext];
         [o2 MR_deleteEntity];
@@ -109,12 +122,15 @@
 
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath *)path
 {
+    if (self.complexSection != 0 && path.section > 0) {
+        return [self.fetch objectAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0]];
+    }
     return [self.fetch objectAtIndexPath:path];
 }
 
 - (void)mvp_moveModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
 {
-    
+    NSLog(@"%s 不能使用",__func__);
 }
 
 - (void)mvp_cleanAll
@@ -224,22 +240,28 @@
         [self.itemChanges addObject:change];
     }
     else {
+        NSIndexPath* p1 = newIndexPath;
+        NSIndexPath* p2 = indexPath;
+        if (self.complexSection != 0) {
+            p1 = [NSIndexPath indexPathForRow:p1.row inSection:self.complexSection];
+            p2 = [NSIndexPath indexPathForRow:p2.row inSection:self.complexSection];
+        }
         switch(type) {
             case NSFetchedResultsChangeInsert:
-                [self.outputer insertAtIndexPath:newIndexPath];
+                [self.outputer insertAtIndexPath:p1];
                 break;
                 
             case NSFetchedResultsChangeDelete:
-                [self.outputer deleleAtIndexPath:indexPath];
+                [self.outputer deleleAtIndexPath:p2];
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self.outputer updateAtIndexPath:indexPath];
+                [self.outputer updateAtIndexPath:p2];
                 break;
                 
             case NSFetchedResultsChangeMove:
                 [self.outputer deleleAtIndexPath:indexPath];
-                [self.outputer insertAtIndexPath:newIndexPath];
+                [self.outputer insertAtIndexPath:p1];
                 break;
         }
     }
@@ -270,21 +292,40 @@
             }
             for (NSDictionary *change in self.itemChanges) {
                 [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                    id x = nil;
+                    if ([obj isKindOfClass:[NSIndexPath class]]) {
+                        NSIndexPath* p = obj;
+                        if (self.complexSection != 0) {
+                            p = [NSIndexPath indexPathForRow:p.row inSection:self.complexSection];
+                        }
+                        x = p;
+                    }
+                    else if([obj isKindOfClass:[NSArray class]])
+                    {
+                        NSArray* p = obj;
+                        if (self.complexSection != 0) {
+                            p = p.map(^id _Nonnull(NSIndexPath*  _Nonnull x) {
+                                
+                                return [NSIndexPath indexPathForRow:x.row inSection:self.complexSection];
+                            });
+                        }
+                        x = p;
+                    }
                     NSFetchedResultsChangeType type = [key unsignedIntegerValue];
                     switch(type) {
                         case NSFetchedResultsChangeInsert:
-                            [self.outputer insertAtIndexPaths:@[obj]];
+                            [self.outputer insertAtIndexPaths:@[x]];
                             break;
                         case NSFetchedResultsChangeDelete:
-                            [self.outputer deleleAtIndexPaths:@[obj]];
+                            [self.outputer deleleAtIndexPaths:@[x]];
                             break;
                         case NSFetchedResultsChangeUpdate:
-                            [self.outputer updateAtIndexPaths:@[obj]];
+                            [self.outputer updateAtIndexPaths:@[x]];
                             break;
                         case NSFetchedResultsChangeMove:
                             //                        [self.outputer moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                            [self.outputer deleleAtIndexPath:obj[0]];
-                            [self.outputer insertAtIndexPath:obj[1]];
+                            [self.outputer deleleAtIndexPath:x[0]];
+                            [self.outputer insertAtIndexPath:x[1]];
                             break;
                     }
                 }];
@@ -302,5 +343,7 @@
 
 @synthesize outputer;
 
+
+@synthesize complexSection;
 
 @end

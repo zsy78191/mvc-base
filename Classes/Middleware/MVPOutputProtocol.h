@@ -30,12 +30,15 @@
 - (NSUInteger)mvp_count;
 @property (nonatomic, weak) id<MVPOutputProtocol> outputer;
 @property (nonatomic, weak) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
+@property (nonatomic, assign) NSUInteger complexSection;
 
 @optional
 - (NSString*)mvp_identifierForModel:(id<MVPModelProtocol>)model;
+
+#pragma mark - coreDataUse
 - (NSArray<NSSortDescriptor *> *) sortDescriptors;
 - (NSPredicate*)predicate;
-
+- (NSString*)sectionKeyPath;
 
 
 @end
@@ -62,6 +65,7 @@
 - (void)insertSectionAtIndex:(NSUInteger)idx;
 - (void)deleteSectionAtIndex:(NSUInteger)idx;
 - (void)setEmpty:(__kindof MVPEmptyMiddleware*)empty;
+
 
 @optional
 - (void)performBatchUpdates:(void (^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion;

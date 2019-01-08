@@ -8,6 +8,8 @@
 
 #import "MyPresenter.h"
 #import "Maininput.h"
+#import "MVPComplexInput.h"
+#import "CoreInput.h"
 #import "MyView.h"
 #import "MyModel.h"
 
@@ -18,6 +20,8 @@
     
 }
 @property (nonatomic, strong) MainInput* mainInput;
+@property (nonatomic, strong) CoreInput* coreInput;
+@property (nonatomic, strong) MVPComplexInput* ci;
 @property (nonatomic, strong) NSString* testString;
 @end
 
@@ -32,9 +36,28 @@
 }
 
 
+- (CoreInput *)coreInput
+{
+    if (!_coreInput) {
+        _coreInput = [[CoreInput alloc] init];
+    }
+    return _coreInput;
+}
+
+- (MVPComplexInput *)ci
+{
+    if (!_ci) {
+        _ci = [[MVPComplexInput alloc] init];
+    }
+    return _ci;
+}
+
+
 - (id)mvp_inputerWithOutput:(id<MVPOutputProtocol>)output
 {
-    return self.mainInput;
+    [self.ci addInput:self.coreInput];
+    [self.ci addInput:self.mainInput];
+    return self.ci;
 }
 
 - (void)addModel
@@ -46,12 +69,12 @@
 
 - (void)cleanAll
 {
-    [self.mainInput mvp_cleanAll];
+    [self.ci mvp_cleanAll];
 }
 
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath *)path
 {
-    [self.mainInput mvp_deleteModelAtIndexPath:path];
+    [self.ci mvp_deleteModelAtIndexPath:path];
 }
 
 - (void)openCore

@@ -14,9 +14,19 @@
 }
 @property (nonatomic, strong) NSMutableArray* table;
 
+
 @end
 
 @implementation MVPArrayInput
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.complexSection = 0;
+    }
+    return self;
+}
 
 - (id)allModels
 {
@@ -60,7 +70,7 @@
 {
     [self.table addObject:model];
     NSUInteger index = [self.table count] - 1;
-    [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:index inSection:self.complexSection]];
     [(id)model setInputer:self];
     return index;
 }
@@ -68,14 +78,17 @@
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
 {
     [self.table insertObject:model atIndex:idx];
-    [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:0]];
+    [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:self.complexSection]];
     [(id)model setInputer:self];
     return idx;
 }
 
 - (NSIndexPath *)mvp_indexPathWithModel:(id<MVPModelProtocol>)model
 {
-    return [NSIndexPath indexPathForRow:[self.table indexOfObject:model] inSection:0];
+    if ([self.table indexOfObject:model] == NSNotFound) {
+        return nil;
+    }
+    return [NSIndexPath indexPathForRow:[self.table indexOfObject:model] inSection:self.complexSection];
 }
 
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path
@@ -131,5 +144,7 @@
  
  
 @synthesize outputer;
+
+@synthesize complexSection;
 
 @end

@@ -17,6 +17,7 @@
 		D40EDA7721D0B4350018F46E /* AppTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D40EDA7521D0B4350018F46E /* AppTitleCell.xib */; };
 		D40EDA7B21D0B6020018F46E /* AppInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D40EDA7A21D0B6020018F46E /* AppInfoModel.m */; };
 		D40EDA8521D21DFF0018F46E /* DMApperance.m in Sources */ = {isa = PBXBuildFile; fileRef = D40EDA8421D21DFF0018F46E /* DMApperance.m */; };
+		D45604DE21E472D500F95723 /* MVPComplexInput.m in Sources */ = {isa = PBXBuildFile; fileRef = D45604DD21E472D500F95723 /* MVPComplexInput.m */; };
 		D4616C1B21D22BD80021F048 /* DCView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4616C1A21D22BD80021F048 /* DCView.m */; };
 		D4616C2121D22F730021F048 /* DCPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = D4616C2021D22F730021F048 /* DCPresenter.m */; };
 		D4616C2521D22FAB0021F048 /* DCInput.m in Sources */ = {isa = PBXBuildFile; fileRef = D4616C2421D22FAB0021F048 /* DCInput.m */; };
@@ -108,6 +109,8 @@
 		D40EDA7A21D0B6020018F46E /* AppInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppInfoModel.m; sourceTree = "<group>"; };
 		D40EDA8321D21DFF0018F46E /* DMApperance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMApperance.h; sourceTree = "<group>"; };
 		D40EDA8421D21DFF0018F46E /* DMApperance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMApperance.m; sourceTree = "<group>"; };
+		D45604DC21E472D500F95723 /* MVPComplexInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MVPComplexInput.h; sourceTree = "<group>"; };
+		D45604DD21E472D500F95723 /* MVPComplexInput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MVPComplexInput.m; sourceTree = "<group>"; };
 		D4616C1921D22BD80021F048 /* DCView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCView.h; sourceTree = "<group>"; };
 		D4616C1A21D22BD80021F048 /* DCView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCView.m; sourceTree = "<group>"; };
 		D4616C1F21D22F730021F048 /* DCPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCPresenter.h; sourceTree = "<group>"; };
@@ -406,6 +409,8 @@
 				D4616C4521D37D860021F048 /* MVPCoredataInput.m */,
 				D4616C4621D37D860021F048 /* MVPArrayInput.h */,
 				D4616C4821D37D860021F048 /* MVPArrayInput.m */,
+				D45604DC21E472D500F95723 /* MVPComplexInput.h */,
+				D45604DD21E472D500F95723 /* MVPComplexInput.m */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -890,6 +895,7 @@
 				D40EDA6E21D0B05B0018F46E /* DMInput.m in Sources */,
 				D4B11C9421D4D94F00692FD1 /* MVPInitModel.m in Sources */,
 				D4616C8121D37D860021F048 /* MVPContentCell.m in Sources */,
+				D45604DE21E472D500F95723 /* MVPComplexInput.m in Sources */,
 				D4616C8521D37D860021F048 /* MVPListView.m in Sources */,
 				D47B69F121CE124500214999 /* CorePresenter.m in Sources */,
 				D47B69F721CE126300214999 /* CoreInput.m in Sources */,

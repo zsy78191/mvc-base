@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.2.1
+
+增加`MVPComplexInput`用于创建复合Input，可以组合不同的Input，每一个Input作为单独section的数据源。
+
 ### 0.2.0
 
 1. `MVPView`增加`bindSelector`方法直接用于绑定`MVPPresenter`的方法实现。
