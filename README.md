@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.2.2
+
+将`CoreDataInput`的fetch加载方式改为懒加载，防止init方法执行于input继承类属性赋值之前导致属性缺失。
+
 ### 0.2.1
 
 增加`MVPComplexInput`用于创建复合Input，可以组合不同的Input，每一个Input作为单独section的数据源。

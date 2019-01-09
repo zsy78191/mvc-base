@@ -33,17 +33,15 @@
     return [NSManagedObjectModel class];
 }
 
-- (instancetype)init
+- (NSFetchedResultsController *)fetch
 {
-    self = [super init];
-    if (self) {
-//        NSLog(@"%@",[self mvp_modelClass]);
+    if (!_fetch) {
         NSFetchRequest* r = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([self mvp_modelClass])];
         if ([self respondsToSelector:@selector(sortDescriptors)]) {
             [r setSortDescriptors:[self sortDescriptors]];
         }
         else {
-           
+            
         }
         
         if ([self respondsToSelector:@selector(predicate)]) {
@@ -51,20 +49,24 @@
         }
         
         
-        self.fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:r managedObjectContext:[NSManagedObjectContext MR_defaultContext] sectionNameKeyPath:[self sectionKeyPath] cacheName:nil];
+        _fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:r managedObjectContext:[NSManagedObjectContext MR_defaultContext] sectionNameKeyPath:[self sectionKeyPath] cacheName:nil];
         
-        [self.fetch setDelegate:self];
+        [_fetch setDelegate:self];
         
         NSError* error;
-        [self.fetch performFetch:&error];
-        NSLog(@"%@",error);
-//        id<NSFetchedResultsSectionInfo> info = [[self.fetch sections] firstObject];
-//        NSLog(@"%@",self.fetch);
-//        NSLog(@"%@",[self.fetch fetchedObjects]);
-//        NSLog(@"%@",@([info numberOfObjects]));
+        [_fetch performFetch:&error];
+        if (error) {
+            NSLog(@"%@",error);
+        }
+    }
+    return _fetch;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
         self.complexSection = 0;
-        
-        
     }
     return self;
 }
