@@ -9,6 +9,7 @@
 #import "MVPTableViewOutput.h"
 @import UIKit;
 #import "MVPModel.h"
+#import "MVPContentCell.h"
 @import DZNEmptyDataSet;
 @interface MVPTableViewOutput () <UITableViewDelegate,UITableViewDataSource>
 {
@@ -84,6 +85,9 @@
     MVPModel* m = [self.inputer mvp_modelAtIndexPath:indexPath];
     NSString* identifier = [[self inputer] mvp_identifierForModel:m];
     __kindof UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if ([cell isKindOfClass:[MVPContentCell class]]) {
+        [(MVPContentCell*)cell setPresenter:self.inputer.presenter];
+    }
     if ([cell respondsToSelector:@selector(loadModel:)]) {
         [(id)cell loadModel:m];
     }

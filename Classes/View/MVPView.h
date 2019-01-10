@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     
 }
 
-@property (nonatomic, strong, readonly) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
+
 - (void)mvp_configMiddleware NS_REQUIRES_SUPER;
 - (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString*)name;
 

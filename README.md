@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.2.3
+
+修改`MVPContentCell`的Presenter获取途径，保证CoredataInput可以正常使用`MVPContentCell`的功能。
+
 ### 0.2.2
 
 将`CoreDataInput`的fetch加载方式改为懒加载，防止init方法执行于input继承类属性赋值之前导致属性缺失。

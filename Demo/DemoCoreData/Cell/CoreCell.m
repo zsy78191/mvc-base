@@ -23,6 +23,7 @@
 
 - (void)loadModel:(Account*)model
 {
+    [super loadModel:(id)model];
 //    NSLog(@"%@",model);
     self.textLabel.text = model.name;
     

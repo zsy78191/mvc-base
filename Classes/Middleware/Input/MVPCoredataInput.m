@@ -125,9 +125,11 @@
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath *)path
 {
     if (self.complexSection != 0 && path.section > 0) {
-        return [self.fetch objectAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0]];
+        id d = [self.fetch objectAtIndexPath:[NSIndexPath indexPathForRow:path.row inSection:0]];
+        return d;
     }
-    return [self.fetch objectAtIndexPath:path];
+    id d = [self.fetch objectAtIndexPath:path];
+    return d;
 }
 
 - (void)mvp_moveModelFromIndexPath:(NSIndexPath *)path1 toPath:(NSIndexPath *)path2
@@ -178,6 +180,7 @@
 }
 
 #pragma mark - fetch
+
 
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

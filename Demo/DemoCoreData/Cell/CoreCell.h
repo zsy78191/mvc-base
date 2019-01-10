@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MVPContentCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CoreCell : UITableViewCell
+@interface CoreCell : MVPContentCell
 
 @end
 

@@ -22,7 +22,7 @@
 //
 //@end
 
-@protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol;
+@protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private;
 @class UIViewController,MVPInitModel,NSManagedObject,UIGestureRecognizer;
 
 @protocol MVPModelProtocol <NSObject>
@@ -76,6 +76,8 @@
 @required
 - (Class)mvp_presenterClass;
 - (Class)mvp_outputerClass;
+
+@property (nonatomic, strong, readonly) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
 
 @end
  

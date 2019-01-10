@@ -139,7 +139,7 @@
         return;
     }
     
-    id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter = [[model inputer] presenter];
+    id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter = self.presenter;
     NSEnumerator* e = [self.actionTable objectEnumerator];
     RACSignal* s = [e nextObject];
     s = [[s takeUntil:[self rac_signalForSelector:@selector(prepareForReuse)]] takeUntil:[self rac_willDeallocSignal]];
