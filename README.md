@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.2.4
+
+处理Tableview闪屏、自动滚动的问题。
+
 ### 0.2.3
 
 修改`MVPContentCell`的Presenter获取途径，保证CoredataInput可以正常使用`MVPContentCell`的功能。

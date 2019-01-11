@@ -64,7 +64,7 @@
 {
     MyModel* m = [[MyModel alloc] init];
     m.name = [[NSDate date] description];
-    [self.mainInput mvp_addModel:m];
+    [self.mainInput mvp_insertModel:m atIndex:0];
 }
 
 - (void)cleanAll

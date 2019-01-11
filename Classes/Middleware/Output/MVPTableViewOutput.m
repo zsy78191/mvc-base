@@ -16,6 +16,7 @@
     
 }
 @property (nonatomic, strong) UITableView* tableview;
+@property (nonatomic, assign) BOOL scrollToTopWhenInsert;
 @end
 
 @implementation MVPTableViewOutput
@@ -107,9 +108,7 @@
 
 - (void)insertAtIndexPath:(NSIndexPath *)path
 {
-//    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
-    [self.tableview insertRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self updataEmpty];
+    [self insertAtIndexPaths:@[path]];
 }
 
 - (void)deleleAtIndexPath:(NSIndexPath *)path
@@ -118,6 +117,25 @@
     [self.tableview deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self updataEmpty];
 }
+
+- (void)setScrollToTopWhenInsert:(BOOL)scrollToTopWhenInsert
+{
+    _scrollToTopWhenInsert = scrollToTopWhenInsert;
+    if (_scrollToTopWhenInsert) {
+        _scrollToInsertPosition = NO;
+    }
+}
+
+- (void)setScrollToInsertPosition:(BOOL)scrollToBottomWhenInsert
+{
+    _scrollToInsertPosition = scrollToBottomWhenInsert;
+    if (_scrollToInsertPosition) {
+        _scrollToTopWhenInsert = NO;
+    }
+}
+
+@synthesize scrollToTopWhenInsert = _scrollToTopWhenInsert;
+@synthesize scrollToInsertPosition = _scrollToInsertPosition;
 
 
 - (void)updateAtIndexPath:(NSIndexPath *)path
@@ -177,14 +195,26 @@
     if ([self.inputer mvp_count] == 1 || [self.inputer mvp_count] == 0) {
         [self.tableview reloadEmptyDataSet];
     }
-    else if ([self.inputer numberOfSections] == 1 || [self.inputer numberOfSections] == 0) {
-        [self.tableview reloadEmptyDataSet];
-    }
+//    else if ([self.inputer numberOfSections] == 1 || [self.inputer numberOfSections] == 0) {
+//        [self.tableview reloadEmptyDataSet];
+//    }
 }
 
 
 - (void)insertAtIndexPaths:(NSArray *)paths {
+    if (self.tableview.decelerating) {
+//    [UIView setAnimationsEnabled:NO];
     [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [UIView setAnimationsEnabled:YES];
+    }
+    else {
+        [self.tableview setContentOffset:self.tableview.contentOffset animated:NO];
+        [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (self.scrollToInsertPosition) {
+            [self.tableview scrollToRowAtIndexPath:[paths firstObject] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        
+    }
     [self updataEmpty];
 }
 
@@ -202,7 +232,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 300;
+    return UITableViewAutomaticDimension;
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated

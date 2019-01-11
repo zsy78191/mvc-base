@@ -89,8 +89,9 @@
     [o mvp_registerNib:[UINib nibWithNibName:@"MyCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCell"];
     [o mvp_registerClass:NSClassFromString(@"CoreCell") forCellReuseIdentifier:@"CoreCell"];
     [o setCanMove:YES];
+    [o setScrollToInsertPosition:YES];
     [o mvp_bindTableRefreshActionName:@"refreshData:"];
-    self.empty = [[MyEmpty alloc] init];
+//    self.empty = [[MyEmpty alloc] init];
 }
 
 - (void)mvp_bindAction

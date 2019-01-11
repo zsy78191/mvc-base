@@ -246,4 +246,8 @@
 
 @synthesize dragHideKeyboard;
 
+@synthesize scrollToInsertPosition;
+
+//@synthesize scrollToTopWhenInsert;
+
 @end
