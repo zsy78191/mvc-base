@@ -96,6 +96,18 @@
     
 }
 
++ (MVPModelNewInstanceBlock)m
+{
+    MVPModelNewInstanceBlock b2 = ^(MVPModelInitailBlock b){
+        __kindof MVPModel* model = [[[self class] alloc] init];
+        if (b) {
+            b(model);
+        }
+        return model;
+    };
+    return b2;
+}
+
 @synthesize inputer;
 
 @end

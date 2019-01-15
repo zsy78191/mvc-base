@@ -10,9 +10,14 @@
 #import "MVPProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
+@class MVPModel;
+typedef void (^MVPModelInitailBlock)(__kindof MVPModel*);
+typedef __kindof MVPModel* (^MVPModelNewInstanceBlock)(MVPModelInitailBlock);
+
 @interface MVPModel : NSObject <MVPModelProtocol>
 
 - (BOOL)same:(id)v1 with:(id)v2;
+@property (nonatomic, readonly, class) MVPModelNewInstanceBlock m;
 
 @end
 
