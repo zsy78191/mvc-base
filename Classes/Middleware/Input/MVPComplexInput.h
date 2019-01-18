@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 - (void)addInput:(id<MVPInputProtocol>)input;
 - (void)deleteInput:(id<MVPInputProtocol>)input;
+- (id<MVPInputProtocol>)inputerAtIndexPath:(NSIndexPath*)path;
 
 @end
 

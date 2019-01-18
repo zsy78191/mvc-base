@@ -26,6 +26,11 @@
     return _inputs;
 }
 
+- (id<MVPInputProtocol>)inputerAtIndexPath:(NSIndexPath *)path
+{
+    return [self.inputs objectAtIndex:path.section];
+}
+
 #pragma mark - function
 
 - (void)addInput:(id<MVPInputProtocol>)input

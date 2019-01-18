@@ -3,6 +3,9 @@
 
 ## 版本迭代记录
 
+### 0.2.6
+`MVPComplexInput`增加获取子Input的方法。
+
 ### 0.2.5
 给`MVPModel`增加简易实例化的方法。
 
