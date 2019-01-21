@@ -94,11 +94,11 @@
 
 - (NSUInteger)mvp_addModel:(id<MVPModelProtocol>)model;
 {
-    NSInteger index = [self.table count];
-    if (index < 0) {
-        index = 0;
-    }
-    return [self mvp_insertModel:model atIndex:index];
+    NSUInteger idx = self.table.count;
+    [self.table addObject:model];
+    [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:idx inSection:self.complexSection]];
+    [(id)model setInputer:self];
+    return idx;
 }
 
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
