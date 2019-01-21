@@ -3,6 +3,12 @@
 
 ## 版本迭代记录
 
+### 0.2.8
+`MVPTableViewOutput`增加动画开关。
+
+### 0.2.7
+Input增加删除obj的方法。
+
 ### 0.2.6
 `MVPComplexInput`增加获取子Input的方法。
 

@@ -26,6 +26,14 @@
     
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.animation = YES;
+    }
+    return self;
+}
 
 
 - (UITableView *)tableview
@@ -278,6 +286,16 @@
     }
 }
 
+
+- (void)enableAnimation
+{
+    self.animation = YES;
+}
+
+- (void)disableAnimation
+{
+    self.animation = NO;
+}
 
 
 @synthesize inputer;

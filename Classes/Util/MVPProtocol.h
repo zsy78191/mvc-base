@@ -9,6 +9,8 @@
 #ifndef MVCProtocol_h
 #define MVCProtocol_h
 
+@import CoreData;
+
 //@protocol MVPTupleProtocol <NSObject>
 //
 //- (NSArray *)allObjects;
@@ -22,10 +24,10 @@
 //
 //@end
 
-@protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private;
+@protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private,NSFetchRequestResult;
 @class UIViewController,MVPInitModel,NSManagedObject,UIGestureRecognizer;
 
-@protocol MVPModelProtocol <NSObject>
+@protocol MVPModelProtocol <NSObject,NSFetchRequestResult>
 
 - (NSArray *)propertys;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;

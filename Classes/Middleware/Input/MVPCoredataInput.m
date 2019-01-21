@@ -117,6 +117,12 @@
     return nil;
 }
 
+- (void)mvp_deleteModel:(id<MVPModelProtocol>)model
+{
+    NSIndexPath* p = [self mvp_indexPathWithModel:model];
+    [self mvp_deleteModelAtIndexPath:p];
+}
+
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx
 {
     return [self mvp_addModel:model];
@@ -344,6 +350,8 @@
         [self.outputer endUpdates];
     }
 }
+
+
 
 
 @synthesize outputer;

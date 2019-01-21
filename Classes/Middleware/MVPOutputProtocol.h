@@ -23,6 +23,7 @@
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
 - (NSIndexPath*)mvp_indexPathWithModel:(id<MVPModelProtocol>)model;
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath*)path;
+- (void)mvp_deleteModel:(id<MVPModelProtocol>)model;
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath*)path;
 - (void)mvp_moveModelFromIndexPath:(NSIndexPath*)path1 toPath:(NSIndexPath*)path2;
 - (void)mvp_cleanAll;
@@ -51,6 +52,10 @@
 
 @property (nonatomic, assign) BOOL scrollToInsertPosition;
 @property (nonatomic, assign) BOOL dragHideKeyboard;
+
+- (void)enableAnimation;
+- (void)disableAnimation;
+
 
 - (void)beginUpdates;
 - (void)endUpdates;

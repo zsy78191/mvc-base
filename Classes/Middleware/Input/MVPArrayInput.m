@@ -28,11 +28,6 @@
     return self;
 }
 
-- (id)allModels
-{
-    return [self.table copy];
-}
-
 - (NSMutableArray *)table
 {
     if (!_table) {
@@ -66,13 +61,41 @@
     
 }
 
+- (void)removeFromInputer
+{
+    
+}
+
+- (NSUInteger)mvp_count
+{
+    return [self.table count];
+}
+
+
+#pragma mark - 增删改查
+
+- (id)allModels
+{
+    return [self.table copy];
+}
+
+- (NSIndexPath *)mvp_indexPathWithModel:(id<MVPModelProtocol>)model
+{
+    if ([self.table indexOfObject:model] == NSNotFound) {
+        return nil;
+    }
+    return [NSIndexPath indexPathForRow:[self.table indexOfObject:model] inSection:self.complexSection];
+}
+
+- (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath *)path
+{
+    return [self.table objectAtIndex:[path row]];
+}
+
 - (NSUInteger)mvp_addModel:(id<MVPModelProtocol>)model;
 {
-    [self.table addObject:model];
     NSUInteger index = [self.table count] - 1;
-    [self.outputer insertAtIndexPath:[NSIndexPath indexPathForRow:index inSection:self.complexSection]];
-    [(id)model setInputer:self];
-    return index;
+    return [self mvp_insertModel:model atIndex:index];
 }
 
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
@@ -83,12 +106,12 @@
     return idx;
 }
 
-- (NSIndexPath *)mvp_indexPathWithModel:(id<MVPModelProtocol>)model
+- (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath *)path
 {
-    if ([self.table indexOfObject:model] == NSNotFound) {
-        return nil;
-    }
-    return [NSIndexPath indexPathForRow:[self.table indexOfObject:model] inSection:self.complexSection];
+    NSUInteger idx = [path row];
+    [self.table removeObjectAtIndex:idx];
+    [self.table insertObject:model atIndex:idx];
+    [self.outputer updateAtIndexPath:path];
 }
 
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path
@@ -104,11 +127,11 @@
     return obj;
 }
 
-- (void)removeFromInputer
+- (void)mvp_deleteModel:(id<MVPModelProtocol>)model
 {
-    
+    NSIndexPath* p = [self mvp_indexPathWithModel:model];
+    [self mvp_deleteModelAtIndexPath:p];
 }
-
 
 - (void)mvp_cleanAll
 {
@@ -122,27 +145,6 @@
     [self.outputer deleteAll];
 }
 
-
-- (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath *)path
-{
-    NSUInteger idx = [path row];
-    [self.table removeObjectAtIndex:idx];
-    [self.table insertObject:model atIndex:idx];
-    [self.outputer updateAtIndexPath:path];
-}
-
-- (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath *)path
-{
-    return [self.table objectAtIndex:[path row]];
-}
-
-- (NSUInteger)mvp_count
-{
-    return [self.table count];
-}
-
- 
- 
 @synthesize outputer;
 
 @synthesize complexSection;

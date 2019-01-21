@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MVPCoredataInput : MVPBaseMiddleware <MVPInputProtocol>
 
 - (Class)mvp_modelClass;
-- (NSIndexPath *)mvp_indexPathWithModel:(id<NSFetchRequestResult>)model;
 - (void)loadCoreData:(__kindof NSManagedObject*)obj fromModel:(id<MVPModelProtocol>)model;
 
 @end

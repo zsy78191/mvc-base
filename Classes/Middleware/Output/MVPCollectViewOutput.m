@@ -240,6 +240,15 @@
     return self.inputer?[self.inputer numberOfSections]:1;
 }
 
+- (void)enableAnimation
+{
+    
+}
+
+- (void)disableAnimation
+{
+    
+}
 
 
 @synthesize canMove;

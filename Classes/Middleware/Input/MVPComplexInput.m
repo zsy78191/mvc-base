@@ -95,6 +95,12 @@
     return [input mvp_deleteModelAtIndexPath:path];
 }
 
+- (void)mvp_deleteModel:(id<MVPModelProtocol>)model
+{
+    NSIndexPath* p = [self mvp_indexPathWithModel:model];
+    [self mvp_deleteModelAtIndexPath:p];
+}
+
 - (NSIndexPath *)mvp_indexPathWithModel:(id<MVPModelProtocol>)model {
     __block NSUInteger idx = 0;
     __block NSUInteger sec = 0;
@@ -151,6 +157,8 @@
         [obj setOutputer:outputer];
     }];
 }
+
+
 
 @synthesize complexSection;
 
