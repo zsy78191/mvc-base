@@ -94,7 +94,10 @@
 
 - (NSUInteger)mvp_addModel:(id<MVPModelProtocol>)model;
 {
-    NSUInteger index = [self.table count] - 1;
+    NSInteger index = [self.table count] - 1;
+    if (index < 0) {
+        index = 0;
+    }
     return [self mvp_insertModel:model atIndex:index];
 }
 
