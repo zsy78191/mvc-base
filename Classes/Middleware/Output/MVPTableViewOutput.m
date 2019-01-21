@@ -122,7 +122,7 @@
 - (void)deleleAtIndexPath:(NSIndexPath *)path
 {
 //    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
-    [self.tableview deleteRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableview deleteRowsAtIndexPaths:@[path] withRowAnimation:[self currentAnimation]];
     [self updataEmpty];
 }
 
@@ -146,10 +146,15 @@
 @synthesize scrollToInsertPosition = _scrollToInsertPosition;
 
 
+- (UITableViewRowAnimation)currentAnimation
+{
+    return self.animation?UITableViewRowAnimationAutomatic:UITableViewRowAnimationNone;
+}
+
 - (void)updateAtIndexPath:(NSIndexPath *)path
 {
 //    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
-    [self.tableview reloadRowsAtIndexPaths:@[path] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableview reloadRowsAtIndexPaths:@[path] withRowAnimation:[self currentAnimation]];
 }
 
 - (void)mvp_registerNib:(UINib *)nib forCellReuseIdentifier:(NSString *)identifier
@@ -173,7 +178,7 @@
 }
 
 - (void)deleteSectionAtIndex:(NSUInteger)idx {
-    [self.tableview deleteSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableview deleteSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:[self currentAnimation]];
     [self updataEmpty];
 }
 
@@ -184,7 +189,7 @@
 }
 
 - (void)insertSectionAtIndex:(NSUInteger)idx {
-    [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:[self currentAnimation]];
     [self updataEmpty];
 }
 
@@ -194,7 +199,7 @@
 }
 
 - (void)deleleAtIndexPaths:(NSArray *)paths {
-    [self.tableview deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableview deleteRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
     [self updataEmpty];
 }
 
@@ -212,12 +217,12 @@
 - (void)insertAtIndexPaths:(NSArray *)paths {
     if (self.tableview.decelerating) {
 //    [UIView setAnimationsEnabled:NO];
-    [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
 //    [UIView setAnimationsEnabled:YES];
     }
     else {
         [self.tableview setContentOffset:self.tableview.contentOffset animated:NO];
-        [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
         if (self.scrollToInsertPosition) {
             [self.tableview scrollToRowAtIndexPath:[paths firstObject] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         }
@@ -228,7 +233,7 @@
 
 
 - (void)updateAtIndexPaths:(NSArray *)paths {
-     [self.tableview reloadRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+     [self.tableview reloadRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
 }
 
 
