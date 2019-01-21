@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "MVPModel.h"
+#import "MVPArrayInput.h"
 @interface mvc_baseTests : XCTestCase
 
 @end
@@ -22,11 +23,33 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
 }
 
+- (void)testa
+{
+    MVPModel* m  = [[MVPModel alloc] init];
+    MVPModel* m2  = [[MVPModel alloc] init];
+    MVPModel* m3  = [[MVPModel alloc] init];
+    MVPModel* m4  = [[MVPModel alloc] init];
+    NSLog(@"%@",m);
+    NSLog(@"%@",m2);
+    NSLog(@"%@",m3);
+    NSLog(@"%@",m4);
+    
+    
+    MVPArrayInput* a = [[MVPArrayInput alloc] init];
+    [a mvp_addModel:m];
+    [a mvp_addModel:m2];
+    [a mvp_addModel:m3];
+    [a mvp_addModel:m4];
+    
+    [[a allModels] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSLog(@"%@",obj);
+    }];
+}
 
 /**
  测试model是否相等
  */
-- (void)testForModelSame {
+- (void)atestForModelSame {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     MVPModel* m  = [[MVPModel alloc] init];
