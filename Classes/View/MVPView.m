@@ -211,6 +211,23 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     return b;
 }
 
+- (UIBarButtonItem *)mvp_buttonItemWithActionName:(NSString *)name title:(nonnull NSString *)title
+{
+    UIBarButtonItem* b = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self.presenter action:@selector(mvc_action:)];
+    b.accessibilityLabel = title;
+    [self.presenter mvp_registActionName:name item:b];
+    return b;
+}
+
+- (UIBarButtonItem*)mvp_buttonItemWithSystem:(UIBarButtonSystemItem)systemItem actionName:(NSString *)name title:(NSString *)title
+{
+    UIBarButtonItem* b = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:systemItem target:self.presenter action:@selector(mvc_action:)];
+    b.title = title;
+    b.accessibilityLabel = title;
+    [self.presenter mvp_registActionName:name item:b];
+    return b;
+}
+
 - (void)mvp_bindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(nonnull NSString *)name
 {
     [target addTarget:self.presenter action:@selector(mvc_action:) forControlEvents:event];

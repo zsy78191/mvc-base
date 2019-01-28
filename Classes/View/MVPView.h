@@ -20,7 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)mvp_configMiddleware NS_REQUIRES_SUPER;
-- (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString*)name;
+- (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString *)name;
+- (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString*)name title:(NSString*)title;
+- (UIBarButtonItem*)mvp_buttonItemWithSystem:(UIBarButtonSystemItem)systemItem actionName:(NSString*)name title:(NSString*)title;
 
 #pragma mark - config
 

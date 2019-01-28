@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.2.9
+
+`MVPView`增加navigationItem的生成方法，并且强制设置title，用于给VoiceOver提供提示。
+
 ### 0.2.8
 `MVPTableViewOutput`增加动画开关。
 
