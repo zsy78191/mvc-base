@@ -44,9 +44,7 @@
         [table setTableFooterView:[UIView new]];
         [table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
         
-        UIRefreshControl *refreshController = [[UIRefreshControl alloc] init];
-
-        self.refreshControl = refreshController;
+      
 
         _tableview = table;
     }
@@ -58,6 +56,15 @@
     [self.refreshControl addTarget:self.presenter action:NSSelectorFromString(name) forControlEvents:UIControlEventValueChanged];
 //    [self.tableview addSubview:self.refreshControl];
     self.tableview.refreshControl = self.refreshControl;
+}
+
+- (UIRefreshControl *)refreshControl
+{
+    if (!_refreshControl) {
+        _refreshControl = [[UIRefreshControl alloc] init];
+ 
+    }
+    return _refreshControl;
 }
 
 
