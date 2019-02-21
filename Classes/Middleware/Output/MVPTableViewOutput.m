@@ -56,7 +56,8 @@
 - (void)mvp_bindTableRefreshActionName:(NSString *)name
 {
     [self.refreshControl addTarget:self.presenter action:NSSelectorFromString(name) forControlEvents:UIControlEventValueChanged];
-    [self.tableview addSubview:self.refreshControl];
+//    [self.tableview addSubview:self.refreshControl];
+    self.tableview.refreshControl = self.refreshControl;
 }
 
 
