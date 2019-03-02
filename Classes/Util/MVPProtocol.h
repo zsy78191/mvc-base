@@ -9,6 +9,7 @@
 #ifndef MVCProtocol_h
 #define MVCProtocol_h
 
+@import UIKit;
 @import CoreData;
 
 //@protocol MVPTupleProtocol <NSObject>
@@ -25,7 +26,7 @@
 //@end
 
 @protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private,NSFetchRequestResult;
-@class UIViewController,MVPInitModel,NSManagedObject,UIGestureRecognizer;
+@class UIViewController,MVPInitModel,NSManagedObject,UIGestureRecognizer,UIAlertController,UIView;
 
 @protocol MVPModelProtocol <NSObject,NSFetchRequestResult>
 
@@ -75,11 +76,37 @@
 - (void)mvp_presentViewController:(__kindof UIViewController*)vc animated: (BOOL)flag completion:(void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);
 - (void)mvp_dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);;
 
+- (UIAlertController*)alert:(NSString*)title
+                  recommend:(NSString*)recommend
+                     action:(NSString*)action
+                     cancel:(NSString*)cancel
+                      block:(void(^)(NSInteger idx, __kindof UIViewController* vc))block;
+
+- (UIAlertController*)actionsheet:(NSString*)title
+                        recommend:(NSString*)recommend
+                           action:(NSString*)action
+                           cancel:(NSString*)cancel
+                            block:(void(^)(NSInteger idx, __kindof UIViewController* vc))block;
+
+- (void)showAsProver:(UIAlertController*)controller
+                view:(__kindof UIView* )sourceView
+                rect:(CGRect) sourceRect
+               arrow:(UIPopoverArrowDirection) arrow;
+
+
+- (void)hudInfo:(NSString*)message;
+- (void)hudSuccess:(NSString*)message;
+- (void)hudFail:(NSString*)message;
+- (void)hudProgress:(float)progress;
+- (void)hudWait:(NSString*)message;
+
+
 @required
 - (Class)mvp_presenterClass;
 - (Class)mvp_outputerClass;
 
 @property (nonatomic, strong, readonly) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
+
 
 @end
  

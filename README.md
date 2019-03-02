@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.3.0
+
+修改MVPView的协议接口声明，修改TableOutput默认关闭动画，修改Presenter的BarItem绑定增加sender参数
+
 ### 0.2.9
 
 `MVPView`增加navigationItem的生成方法，并且强制设置title，用于给VoiceOver提供提示。

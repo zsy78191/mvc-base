@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "mvc-base"
-  s.version      = "0.2.9.2"
+  s.version      = "0.3.0"
   s.summary      = "自用代码库MVC框架"
 
   # This description is used to generate tags and improve search results.

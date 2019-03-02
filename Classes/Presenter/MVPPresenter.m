@@ -116,7 +116,7 @@
 - (void)mvc_action:(id)sender
 {
     NSString* action = [[self table] objectForKey:sender];
-    [self mvp_runAction:action];
+    [self mvp_runAction:action sender:sender];
 }
 
 - (void)mvp_runAction:(NSString*)actionName value:(id)value;
@@ -132,13 +132,20 @@
     }
 }
 
-- (void)mvp_runAction:(NSString*)actionName;
+- (void)mvp_runAction:(NSString*)actionName sender:(id)sender;
 {
     SEL s = NSSelectorFromString(actionName);
     if ([self respondsToSelector:s]) {
-        IMP imp = [self methodForSelector:s];
-        void (*func)(id, SEL) = (void *)imp;
-        func(self, s);
+        if ([actionName hasSuffix:@":"]) {
+            IMP imp = [self methodForSelector:s];
+            void (*func)(id, SEL, id) = (void *)imp;
+            func(self, s, sender);
+        }
+        else {
+            IMP imp = [self methodForSelector:s];
+            void (*func)(id, SEL) = (void *)imp;
+            func(self, s);
+        }
     }
     else{
         NSLog(@"%@'s selector [%@] unexist",self,actionName);

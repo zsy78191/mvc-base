@@ -30,7 +30,7 @@
 {
     self = [super init];
     if (self) {
-        self.animation = YES;
+        self.animation = NO;
     }
     return self;
 }

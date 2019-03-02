@@ -15,6 +15,7 @@
 #import "MVPSubview.h"
 #import "MVPOutputProtocol.h"
 #import "MVPInitModel.h"
+@import ui_base;
 //#import "MyItem.h"
 @interface MVPView ()
 @property (nonatomic, strong, readwrite) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;
@@ -148,7 +149,7 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
 
 -(void)mvp_bindData
 {
-    
+   
 }
 
 - (void)mvp_bindAction
