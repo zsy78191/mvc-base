@@ -132,6 +132,19 @@
     }
 }
 
+- (void)mvp_runAction:(NSString*)actionName
+{
+    SEL s = NSSelectorFromString(actionName);
+    if ([self respondsToSelector:s]) {
+        IMP imp = [self methodForSelector:s];
+        void (*func)(id, SEL) = (void *)imp;
+        func(self, s);
+    }
+    else{
+        NSLog(@"%@'s selector [%@] unexist",self,actionName);
+    }
+}
+
 - (void)mvp_runAction:(NSString*)actionName sender:(id)sender;
 {
     SEL s = NSSelectorFromString(actionName);
