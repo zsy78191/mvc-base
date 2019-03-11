@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.3.1
+
+CoredataInput增加结果数量限制
+
 ### 0.3.0
 
 修改MVPView的协议接口声明，修改TableOutput默认关闭动画，修改Presenter的BarItem绑定增加sender参数

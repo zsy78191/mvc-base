@@ -47,7 +47,11 @@
         if ([self respondsToSelector:@selector(predicate)]) {
             [r setPredicate:[self predicate]];
         }
+   
         
+        if ([self fetchLimitCount] != 0) {
+            r.fetchLimit = [self fetchLimitCount];
+        }
         
         _fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:r managedObjectContext:[NSManagedObjectContext MR_defaultContext] sectionNameKeyPath:[self sectionKeyPath] cacheName:nil];
         
@@ -69,6 +73,11 @@
         self.complexSection = 0;
     }
     return self;
+}
+
+- (NSUInteger)fetchLimitCount
+{
+    return 0;
 }
 
 - (NSString*)sectionKeyPath

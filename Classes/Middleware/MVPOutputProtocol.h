@@ -36,10 +36,15 @@
 @optional
 - (NSString*)mvp_identifierForModel:(id<MVPModelProtocol>)model;
 
-#pragma mark - coreDataUse
+@end
+
+@protocol MVPCoreDataInputProtocol <MVPInputProtocol>
+
+@optional
 - (NSArray<NSSortDescriptor *> *) sortDescriptors;
 - (NSPredicate*)predicate;
 - (NSString*)sectionKeyPath;
+- (NSUInteger)fetchLimitCount; //defalut is 0 ，no limit
 
 
 @end
