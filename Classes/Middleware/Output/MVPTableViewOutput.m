@@ -310,6 +310,10 @@
     self.animation = NO;
 }
 
+- (void)reloadData
+{
+    [self.tableview reloadData];
+}
 
 @synthesize inputer;
 

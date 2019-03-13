@@ -33,6 +33,11 @@
     return [NSManagedObjectModel class];
 }
 
+- (void)rebuildFetch
+{
+    self.fetch = nil;
+}
+
 - (NSFetchedResultsController *)fetch
 {
     if (!_fetch) {

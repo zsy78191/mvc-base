@@ -45,7 +45,7 @@
 - (NSPredicate*)predicate;
 - (NSString*)sectionKeyPath;
 - (NSUInteger)fetchLimitCount; //defalut is 0 ，no limit
-
+- (void)rebuildFetch;
 
 @end
 
@@ -64,6 +64,7 @@
 
 - (void)beginUpdates;
 - (void)endUpdates;
+- (void)reloadData;
 
 - (void)insertAtIndexPath:(NSIndexPath*)path;
 - (void)deleleAtIndexPath:(NSIndexPath*)path;

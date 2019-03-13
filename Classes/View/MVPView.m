@@ -173,6 +173,23 @@ void uibase_swizzleMethod(Class class, SEL originalSelector, SEL swizzledSelecto
     
 }
 
+- (void)mvp_reloadData
+{
+    [self.outputer reloadData];
+}
+
+- (void)mvp_runAction:(SEL)selector
+{
+    if ([self respondsToSelector:selector]) {
+        IMP imp = [self methodForSelector:selector];
+        void (*func)(id, SEL) = (void *)imp;
+        func(self, selector);
+    }
+    else {
+        NSLog(@"%@ can't responds To Selector %@",self,NSStringFromSelector(selector));
+    }
+}
+
 - (void)mvp_pushViewController:(__kindof UIViewController *)vc
 {
     [self.navigationController pushViewController:vc animated:YES];

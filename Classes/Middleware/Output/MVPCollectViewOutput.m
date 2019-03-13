@@ -250,6 +250,10 @@
     
 }
 
+- (void)reloadData
+{
+    [self.collectionView reloadData];
+}
 
 @synthesize canMove;
 

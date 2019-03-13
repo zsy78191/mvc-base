@@ -3,6 +3,12 @@
 
 ## 版本迭代记录
 
+### 0.3.2
+
+CoredataInput增加刷新FetchController的方法
+MVPOutputProtocol增加刷新方法
+MVPView增加刷新方法，增加执行selector的方法
+
 ### 0.3.1
 
 CoredataInput增加结果数量限制

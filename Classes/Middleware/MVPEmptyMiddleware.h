@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)didTapButton:(UIButton *)button;
 - (UIView *)customView;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
     
 }
 
-
 - (void)mvp_configMiddleware NS_REQUIRES_SUPER;
 - (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString *)name;
 - (UIBarButtonItem*)mvp_buttonItemWithActionName:(NSString*)name title:(NSString*)title;
@@ -31,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mvp_configTable;
 - (void)mvp_configOther;
 
-
 - (void)mvp_bindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
 - (void)mvp_unbindAction:(UIControlEvents)event target:(__kindof UIControl*)target actionName:(NSString*)name;
 - (void)mvp_bindSelector:(SEL)selector;
@@ -42,9 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) __kindof MVPViewApperance* appear;
 
 - (void)mvp_initFromModel:(MVPInitModel*)model;
-
 - (instancetype)initWithUserInfo:(NSDictionary*)userinfo;
-
+- (void)mvp_reloadData;
+- (void)mvp_runAction:(SEL)selector;
 
 @end
 
