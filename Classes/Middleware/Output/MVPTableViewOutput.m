@@ -15,7 +15,7 @@
 {
     
 }
-@property (nonatomic, strong) UITableView* tableview;
+//@property (nonatomic, strong) UITableView* tableview;
 @property (nonatomic, assign) BOOL scrollToTopWhenInsert;
 @end
 
@@ -35,17 +35,24 @@
     return self;
 }
 
+- (Class)tableviewClass
+{
+    return [UITableView class];
+}
+
+- (void)registNibCell:(NSString *)cell withIdentifier:(NSString *)identifier
+{
+    [[self tableview] registerNib:[UINib nibWithNibName:cell bundle:[NSBundle mainBundle]] forCellReuseIdentifier:identifier];
+}
+
 
 - (UITableView *)tableview
 {
     if (!_tableview) {
-        UITableView* table = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        UITableView* table = [[[self tableviewClass] alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         table.dataSource = self;
         [table setTableFooterView:[UIView new]];
         [table registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-        
-      
-
         _tableview = table;
     }
     return _tableview;
@@ -70,7 +77,7 @@
 
 #pragma mark - Handle Refresh Method
 
--(void)handleRefresh : (id)sender
+- (void)handleRefresh:(id)sender
 {
     
 }
@@ -86,11 +93,6 @@
 - (UIView *)outputView
 {
     self.tableview.delegate = self;
-//    self.delegate.dragHideKeyboard = self.dragHideKeyboard;
-//    if (self.dragHideKeyboard) {
-//        [self.tableview setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
-//    }
-//    self.delegate.presenter = self.presenter;
     return self.tableview;
 }
 
@@ -109,6 +111,14 @@
         [(id)cell loadModel:m];
     }
     return cell;
+}
+
+- (void)setRegistBlock:(void (^)(id))registBlock
+{
+    _registBlock = registBlock;
+    if (registBlock) {
+        registBlock(self);
+    }
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -216,17 +226,12 @@
     if ([self.inputer mvp_count] == 1 || [self.inputer mvp_count] == 0) {
         [self.tableview reloadEmptyDataSet];
     }
-//    else if ([self.inputer numberOfSections] == 1 || [self.inputer numberOfSections] == 0) {
-//        [self.tableview reloadEmptyDataSet];
-//    }
 }
 
 
 - (void)insertAtIndexPaths:(NSArray *)paths {
     if (self.tableview.decelerating) {
-//    [UIView setAnimationsEnabled:NO];
     [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
-//    [UIView setAnimationsEnabled:YES];
     }
     else {
         [self.tableview setContentOffset:self.tableview.contentOffset animated:NO];
@@ -243,8 +248,6 @@
 - (void)updateAtIndexPaths:(NSArray *)paths {
      [self.tableview reloadRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -278,15 +281,9 @@
     return self.canMove;
 }
 
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //    [self.presenter ]
-    //    if ([self.presenter ]) {
-    
-    //    }
     if ([self.presenter respondsToSelector:@selector(mvp_action_selectItemAtIndexPath:)]) {
         [self.presenter mvp_action_selectItemAtIndexPath:indexPath];
     }
@@ -298,7 +295,6 @@
         [scrollView endEditing:YES];
     }
 }
-
 
 - (void)enableAnimation
 {
@@ -320,5 +316,9 @@
 @synthesize canMove;
 
 @synthesize dragHideKeyboard;
+
+@synthesize tableview = _tableview;
+
+@synthesize registBlock = _registBlock;
 
 @end

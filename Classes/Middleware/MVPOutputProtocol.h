@@ -8,7 +8,7 @@
 
 #ifndef MVPOutputProtocol_g_h
 #define MVPOutputProtocol_g_h
-@class UIView;
+@class UIView,UITableView,UICollectionView;
 @class MVPEmptyMiddleware;
 @protocol MVPOutputProtocol,MVPModelProtocol,MVPPresenterProtocol,MVPPresenterProtocol_private;
 @protocol MVPInputProtocol <NSObject>
@@ -61,7 +61,6 @@
 - (void)enableAnimation;
 - (void)disableAnimation;
 
-
 - (void)beginUpdates;
 - (void)endUpdates;
 - (void)reloadData;
@@ -79,11 +78,21 @@
 - (void)deleteSectionAtIndex:(NSUInteger)idx;
 - (void)setEmpty:(__kindof MVPEmptyMiddleware*)empty;
 
+@property (nonatomic, strong) void(^registBlock)(id output);
+- (void)registNibCell:(NSString*)cell withIdentifier:(NSString*)identifier;
 
 @optional
 - (void)performBatchUpdates:(void (^ _Nullable)(void))updates completion:(void (^ _Nullable)(BOOL finished))completion;
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 
+@end
+
+@protocol MVPTableViewOutputProtocol <MVPOutputProtocol>
+@property (nonatomic, strong) UITableView* tableview;
+@end
+
+@protocol MVPCollectionViewOutputProtocol <MVPOutputProtocol>
+@property (nonatomic, strong) UICollectionView* collectionView;
 @end
 
 #endif /* MVPOutputProtocol_g_h */

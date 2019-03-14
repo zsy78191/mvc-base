@@ -3,6 +3,10 @@
 
 ## 版本迭代记录
 
+### 0.3.3
+
+MVPTableViewOutput和MVPCollectViewOutput增加TableView和CollectionView属性，MVPTableViewOutput增加tableView的Class设置，两个都增加了注册Cell用的Block，和注册Nib的简单方法。
+
 ### 0.3.2
 
 CoredataInput增加刷新FetchController的方法

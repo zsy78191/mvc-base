@@ -51,7 +51,7 @@
 {
     [super mvp_configMiddleware];
     
-    MVPTableViewOutput* o = self.outputer;
+    MVPTableViewOutput* o = (id)self.outputer;
     [o mvp_registerClass:NSClassFromString(@"CoreCell") forCellReuseIdentifier:@"CoreCell"];
     
     self.empty = [[MVPEmptyMiddleware alloc] init];

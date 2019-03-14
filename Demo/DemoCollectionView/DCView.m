@@ -51,11 +51,11 @@
     [super mvp_configMiddleware];
     
     if ([self.type isEqualToString:@"collection"]) {
-        DCOutput* o = self.outputer;
+        DCOutput* o = (id)self.outputer;
         [o mvp_registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"CoreCell"];
     }
     else {
-        MVPCollectViewOutput* o = self.outputer;
+        MVPCollectViewOutput* o = (id)self.outputer;
         [o mvp_registerNib:[UINib nibWithNibName:@"DCCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"cell"];
     }
 

@@ -12,17 +12,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class UINib;
-@interface MVPTableViewOutput : MVPBaseMiddleware <MVPOutputProtocol>
+@interface MVPTableViewOutput : MVPBaseMiddleware <MVPTableViewOutputProtocol>
 
 - (void)mvp_registerNib:(nullable UINib *)nib forCellReuseIdentifier:(NSString *)identifier NS_AVAILABLE_IOS(5_0);
 - (void)mvp_registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier NS_AVAILABLE_IOS(6_0);
-
 @property (nonatomic, strong) MVPTableViewDelegate* delegate;
-
 @property (nonatomic, strong) UIRefreshControl* refreshControl;
 - (void)mvp_bindTableRefreshActionName:(NSString*)name;
-
 @property (nonatomic, assign) BOOL animation;
+- (void)registNibCell:(NSString*)cell withIdentifier:(NSString*)identifier;
+- (Class)tableviewClass;
 
 @end
 

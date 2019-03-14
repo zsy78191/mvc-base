@@ -85,7 +85,7 @@
 - (void)mvp_configMiddleware
 {
     [super mvp_configMiddleware];
-    MVPTableViewOutput* o = self.outputer;
+    MVPTableViewOutput* o = (id)self.outputer;
     [o mvp_registerNib:[UINib nibWithNibName:@"MyCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"MyCell"];
     [o mvp_registerClass:NSClassFromString(@"CoreCell") forCellReuseIdentifier:@"CoreCell"];
     [o setCanMove:YES];

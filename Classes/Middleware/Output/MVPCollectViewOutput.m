@@ -12,7 +12,7 @@
 #import "MVPOutputProtocol.h"
 @import DZNEmptyDataSet;
 @interface MVPCollectViewOutput () <UICollectionViewDataSource, UICollectionViewDelegate>
-@property (nonatomic, strong) UICollectionView* collectionView;
+//@property (nonatomic, strong) UICollectionView* collectionView;
 @end
 
 @implementation MVPCollectViewOutput
@@ -41,6 +41,11 @@
 - (void)deleteAll
 {
     [self.collectionView reloadData];
+}
+
+- (void)registNibCell:(NSString *)cell withIdentifier:(NSString *)identifier
+{
+    [[self collectionView] registerNib:[UINib nibWithNibName:cell bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:identifier];
 }
 
 - (Class)collectionViewClass
@@ -261,6 +266,18 @@
 
 @synthesize scrollToInsertPosition;
 
+@synthesize collectionView = _collectionView;
+
 //@synthesize scrollToTopWhenInsert;
+
+@synthesize registBlock = _registBlock;
+
+- (void)setRegistBlock:(void (^)(id))registBlock
+{
+    _registBlock = registBlock;
+    if (registBlock) {
+        registBlock(self);
+    }
+}
 
 @end

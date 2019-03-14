@@ -100,6 +100,8 @@
 - (void)hudProgress:(float)progress;
 - (void)hudWait:(NSString*)message;
 
+- (void)mvp_reloadData;
+- (void)mvp_runAction:(SEL)selector;
 
 @required
 - (Class)mvp_presenterClass;

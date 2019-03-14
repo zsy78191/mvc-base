@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class UICollectionViewLayout;
-@interface MVPCollectViewOutput : MVPBaseMiddleware <MVPOutputProtocol>
+@interface MVPCollectViewOutput : MVPBaseMiddleware <MVPCollectionViewOutputProtocol>
 
 - (__kindof UICollectionViewLayout*)collectionViewLayout;
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)mvp_registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
 - (void)mvp_registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
-
+- (void)registNibCell:(NSString*)cell withIdentifier:(NSString*)identifier;
 - (Class)collectionViewClass;
 
 

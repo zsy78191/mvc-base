@@ -49,7 +49,7 @@
 {
     [super mvp_configMiddleware];
     
-    MVPTableViewOutput* o = self.outputer;
+    MVPTableViewOutput* o = (id)self.outputer;
     [o mvp_registerNib:[UINib nibWithNibName:@"AppTitleCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"AppTitleCell"];
     [o mvp_registerClass:NSClassFromString(@"MVPContentCell") forCellReuseIdentifier:@"Cell"];
     [o setDragHideKeyboard:YES];
