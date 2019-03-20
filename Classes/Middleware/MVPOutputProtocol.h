@@ -22,6 +22,7 @@
 - (NSUInteger)mvp_addModel:(id<MVPModelProtocol>)model;
 - (NSUInteger)mvp_insertModel:(id<MVPModelProtocol>)model atIndex:(NSUInteger)idx;
 - (NSIndexPath*)mvp_indexPathWithModel:(id<MVPModelProtocol>)model;
+- (BOOL)containsModel:(id<MVPModelProtocol>)model;
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath*)path;
 - (void)mvp_deleteModel:(id<MVPModelProtocol>)model;
 - (void)mvp_updateModel:(id<MVPModelProtocol>)model atIndexPath:(NSIndexPath*)path;
@@ -34,7 +35,7 @@
 @property (nonatomic, assign) NSUInteger complexSection;
 
 @optional
-- (NSString*)mvp_identifierForModel:(id<MVPModelProtocol>)model;
+- (nullable NSString*)mvp_identifierForModel:(id<MVPModelProtocol>)model;
 
 @end
 

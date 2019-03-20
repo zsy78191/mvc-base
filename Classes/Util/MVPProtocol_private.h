@@ -17,7 +17,6 @@
 - (void)mvp_runAction:(NSString*)actionName;
 - (void)mvp_runAction:(NSString*)actionName value:(id)value;
 
-
 @end
 
 #endif /* MVCProtocol_private_h */

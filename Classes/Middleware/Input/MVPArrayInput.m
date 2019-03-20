@@ -87,6 +87,11 @@
     return [NSIndexPath indexPathForRow:[self.table indexOfObject:model] inSection:self.complexSection];
 }
 
+- (BOOL)containsModel:(id<MVPModelProtocol>)model
+{
+    return [self.table containsObject:model];
+}
+
 - (id<MVPModelProtocol>)mvp_modelAtIndexPath:(NSIndexPath *)path
 {
     return [self.table objectAtIndex:[path row]];

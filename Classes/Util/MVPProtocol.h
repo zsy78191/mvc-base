@@ -30,6 +30,7 @@
 
 @protocol MVPModelProtocol <NSObject,NSFetchRequestResult>
 
+@property (nonatomic, strong) NSString* identifier;
 - (NSArray *)propertys;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;
 - (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model;
@@ -49,7 +50,8 @@
 - (void)mvp_bindItem:(id)item propertyName:(NSString *)name keypath:(NSString*)keypath;
 - (void)mvp_bindBlock:(void (^)(id view,id value))block keypath:(NSString*)keypath;
 - (void)mvp_bindChangeBlock:(void (^)(id view,id value,id add,id remove,id modify))block keypath:(NSString*)keypath;
-- (id)mvp_valueWithSelectorName:(NSString*)name;
+- (nullable id)mvp_valueWithSelectorName:(NSString*)name;
+- (nullable id)mvp_valueWithSelectorName:(NSString*)name sender:(id)sender;
 
 
 #pragma mark - action for mvpview
@@ -70,6 +72,7 @@
 
 @protocol MVPViewProtocol <NSObject>
 
+@optional
 - (void)mvp_pushViewController:(__kindof UIViewController*)vc;
 - (void)mvp_popViewController:(__kindof UIViewController*)vc;
 - (void)mvp_showViewController:(__kindof UIViewController*)vc;
@@ -93,12 +96,18 @@
                 rect:(CGRect) sourceRect
                arrow:(UIPopoverArrowDirection) arrow;
 
+- (void)showAsProver:(UIAlertController*)controller
+                view:(__kindof UIView* )sourceView
+                item:(UIBarButtonItem*) item
+               arrow:(UIPopoverArrowDirection) arrow;
+
 
 - (void)hudInfo:(NSString*)message;
 - (void)hudSuccess:(NSString*)message;
 - (void)hudFail:(NSString*)message;
 - (void)hudProgress:(float)progress;
 - (void)hudWait:(NSString*)message;
+- (void)hudDismiss;
 
 - (void)mvp_reloadData;
 - (void)mvp_runAction:(SEL)selector;

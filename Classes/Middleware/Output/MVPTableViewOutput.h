@@ -9,6 +9,7 @@
 #import "MVPBaseMiddleware.h"
 #import "MVPOutputProtocol.h"
 #import "MVPTableViewDelegate.h"
+#import "MVPCellActionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class UINib;
@@ -22,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL animation;
 - (void)registNibCell:(NSString*)cell withIdentifier:(NSString*)identifier;
 - (Class)tableviewClass;
+
+@property (nonatomic, strong) NSMutableArray<MVPCellActionModel*>* actionsArrays;
+@property (nonatomic, strong) NSMutableArray<MVPCellActionModel*>* leadActionsArrays;
+
 
 @end
 

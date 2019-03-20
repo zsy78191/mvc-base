@@ -9,6 +9,7 @@
 #import "MVPModel.h"
 #import <objc/runtime.h>
 #import "MVPOutputProtocol.h"
+
 @interface MVPModel()
 {
     
@@ -17,11 +18,6 @@
 @end
 
 @implementation MVPModel
-
-- (NSString *)identifier
-{
-    return @"cell";
-}
 
 - (NSArray *)propertys
 {
@@ -109,5 +105,7 @@
 }
 
 @synthesize inputer;
+
+@synthesize identifier = _identifier;
 
 @end

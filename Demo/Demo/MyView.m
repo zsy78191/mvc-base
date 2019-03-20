@@ -11,6 +11,7 @@
 #import "MVPTableViewOutput.h"
 #import "MVPArrayInput.h"
 #import "MyEmpty.h"
+#import "MVPCellActionModel.h"
 @interface MyView ()  
 {
     
@@ -27,6 +28,8 @@
     
 //    self.navigationItem.rightBarButtonItem = ;
 //    self.navigationItem.rightBarButtonItem.title = @"添加";
+    
+    
     
     UIBarButtonItem* item = [self mvp_buttonItemWithActionName:@"addModel"];
     [item setTitle:@"添加"];
@@ -91,6 +94,25 @@
     [o setCanMove:YES];
     [o setScrollToInsertPosition:YES];
     [o mvp_bindTableRefreshActionName:@"refreshData:"];
+    
+   
+    [o.actionsArrays addObject: MVPCellActionModel.m(^(__kindof MVPCellActionModel * _Nonnull m) {
+        m.title = @"1";
+        m.color = [UIColor blueColor];
+    })];
+    
+    [o.actionsArrays addObject: MVPCellActionModel.m(^(__kindof MVPCellActionModel * _Nonnull m) {
+        m.title = @"\u267A \n2";
+        m.action = @"actionDel:";
+        m.color = [UIColor clearColor];
+    })];
+    
+    [o.leadActionsArrays addObject: MVPCellActionModel.m(^(__kindof MVPCellActionModel * _Nonnull m) {
+        m.title = @"\u267A \n2";
+        m.action = @"actionDel:";
+        m.color = [UIColor clearColor];
+    })];
+//    [self setAllowsSelection:NO];
 //    self.empty = [[MyEmpty alloc] init];
 }
 

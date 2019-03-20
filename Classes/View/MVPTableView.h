@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface MVPTableView : MVPListView
 
+@property (nonatomic) BOOL allowsSelection;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,6 +16,7 @@
 #import "MVPOutputProtocol.h"
 #import "MVPInitModel.h"
 @import ui_base;
+
 //#import "MyItem.h"
 @interface MVPView ()
 @property (nonatomic, strong, readwrite) id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter;

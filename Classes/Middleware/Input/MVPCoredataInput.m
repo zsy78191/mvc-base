@@ -38,6 +38,15 @@
     self.fetch = nil;
 }
 
+- (BOOL)containsModel:(id<MVPModelProtocol>)model
+{
+    if (![model isKindOfClass:[NSManagedObject class]]) {
+        return NO;
+    }
+    return !![self.fetch indexPathForObject:model];
+//    return [[self allModels] containsObject:model];
+}
+
 - (NSFetchedResultsController *)fetch
 {
     if (!_fetch) {

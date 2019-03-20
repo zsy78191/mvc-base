@@ -198,7 +198,6 @@
 {
     if (!_table) {
         _table = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSHashTableCopyIn capacity:10];
-
     }
     return _table;
 }
@@ -226,6 +225,27 @@
         return func(self, s);
     }
     NSLog(@"%@'s selector [%@] unexist",self,name);
+    return nil;
+}
+
+- (id)mvp_valueWithSelectorName:(NSString *)name sender:(id)sender
+{
+    SEL s = NSSelectorFromString(name);
+    if ([self respondsToSelector:s]) {
+        if ([name hasSuffix:@":"]) {
+            IMP imp = [self methodForSelector:s];
+            id (*func)(id, SEL, id) = (void *)imp;
+            return func(self, s, sender);
+        }
+        else {
+            IMP imp = [self methodForSelector:s];
+            id (*func)(id, SEL) = (void *)imp;
+            return func(self, s);
+        }
+    }
+    else{
+        NSLog(@"%@'s selector [%@] unexist",self,name);
+    }
     return nil;
 }
 

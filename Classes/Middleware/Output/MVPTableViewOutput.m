@@ -11,6 +11,9 @@
 #import "MVPModel.h"
 #import "MVPContentCell.h"
 @import DZNEmptyDataSet;
+@import oc_string;
+#import "MVPProtocol_private.h"
+
 @interface MVPTableViewOutput () <UITableViewDelegate,UITableViewDataSource>
 {
     
@@ -96,13 +99,23 @@
     return self.tableview;
 }
 
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     if (!self.inputer) {
         UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
         return cell;
     }
     MVPModel* m = [self.inputer mvp_modelAtIndexPath:indexPath];
-    NSString* identifier = [[self inputer] mvp_identifierForModel:m];
+    NSString* identifier = nil;
+    if ([[self inputer] respondsToSelector:@selector(mvp_identifierForModel:)]) {
+        NSString* idf = [[self inputer] mvp_identifierForModel:m];
+        if (idf) {
+            identifier = idf;
+        }
+    }
+    if (!identifier) {
+        identifier = [m identifier];
+    }
     __kindof UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if ([cell isKindOfClass:[MVPContentCell class]]) {
         [(MVPContentCell*)cell setPresenter:self.inputer.presenter];
@@ -237,7 +250,10 @@
         [self.tableview setContentOffset:self.tableview.contentOffset animated:NO];
         [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
         if (self.scrollToInsertPosition) {
-            [self.tableview scrollToRowAtIndexPath:[paths firstObject] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.14 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.tableview scrollToRowAtIndexPath:[paths firstObject] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+            });
         }
         
     }
@@ -309,6 +325,112 @@
 - (void)reloadData
 {
     [self.tableview reloadData];
+}
+
+- (NSMutableArray<MVPCellActionModel *> *)actionsArrays
+{
+    if (!_actionsArrays) {
+        _actionsArrays = [[NSMutableArray alloc] init];
+    }
+    return _actionsArrays;
+}
+
+- (NSMutableArray<MVPCellActionModel *> *)leadActionsArrays
+{
+    if (!_leadActionsArrays) {
+        _leadActionsArrays = [[NSMutableArray alloc] init];
+    }
+    return _leadActionsArrays;
+}
+
+- (NSArray<UITableViewRowAction *> *)actions
+{
+    NSArray* t = self.actionsArrays.filter(^BOOL(MVPCellActionModel*  _Nonnull x) {
+        return x.icon == nil;
+    });
+    if (t.count == 0) {
+        return nil;
+    }
+    __weak typeof(self) weakSelf = self;
+    return
+    t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
+        UITableViewRowAction* action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:x.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+        }];
+        if (x.color) {
+            action.backgroundColor = x.color;
+        }
+        return action;
+    });
+}
+
+- (NSArray<UIContextualAction *> *)tailActions:(NSIndexPath*)indexPath
+{
+    NSArray* t = self.actionsArrays;
+    if (t.count == 0) {
+        return nil;
+    }
+    __weak typeof(self) weakSelf = self;
+    return
+    t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
+        UIContextualAction* action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:x.title handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+            [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+            completionHandler(YES);
+        }];
+        if (x.color) {
+            action.backgroundColor = x.color;
+        }
+        if (x.icon) {
+            action.image = x.icon;
+        }
+        return action;
+    });
+}
+
+- (NSArray<UIContextualAction *> *)leadActions:(NSIndexPath*)indexPath
+{
+    NSArray* t = self.leadActionsArrays;
+    if (t.count == 0) {
+        return nil;
+    }
+    __weak typeof(self) weakSelf = self;
+    return
+    t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
+        UIContextualAction* action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:x.title handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+            [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+            completionHandler(YES);
+        }];
+        if (x.color) {
+            action.backgroundColor = x.color;
+        }
+        if (x.icon) {
+            action.image = x.icon;
+        }
+        return action;
+    });
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self actions];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray* a = [self tailActions:indexPath];
+    if (a.count == 0) {
+        return nil;
+    }
+    return [UISwipeActionsConfiguration configurationWithActions:a];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray* a = [self leadActions:indexPath];
+    if (a.count == 0) {
+        return nil;
+    }
+    return [UISwipeActionsConfiguration configurationWithActions:a];
 }
 
 @synthesize inputer;

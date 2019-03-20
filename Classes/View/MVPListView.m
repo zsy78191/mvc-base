@@ -25,8 +25,24 @@
 - (void)mvp_configMiddleware
 {
     [super mvp_configMiddleware];
+ 
+    if (self.outputer) {
+        //FIX manageView前移
+        __kindof UIView* v = [self.outputer outputView];
+        if ([v isKindOfClass:[UITableView class]] || [v isKindOfClass:[UICollectionView class]]) {
+            self.manageView = v;
+        }
+    }
+    else {
+        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+        label.text = @"没有设置Outputer";
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [self.view addSubview:label];
+        label.center = self.view.center;
+    }
     
 }
+
 
 
 - (void)viewDidLoad
@@ -40,19 +56,7 @@
         NSLog(@"warning %@ did not has selector [mvp_inputerWithOutput:]",self.presenter);
     }
     
-    if (self.outputer) {
-        __kindof UIView* v = [self.outputer outputView];
-        if ([v isKindOfClass:[UITableView class]] || [v isKindOfClass:[UICollectionView class]]) {
-            self.manageView = v;
-        }
-    }
-    else {
-        UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
-        label.text = @"没有设置Outputer";
-        [label setTextAlignment:NSTextAlignmentCenter];
-        [self.view addSubview:label];
-        label.center = self.view.center;
-    }
+    
     
     if (self.inputer) {
         self.outputer.inputer = self.inputer;

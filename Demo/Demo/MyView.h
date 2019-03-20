@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MVPListView.h"
+#import "MVPTableView.h"
 
-@interface MyView : MVPListView
+@interface MyView : MVPTableView
 
 
 @end

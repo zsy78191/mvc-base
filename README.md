@@ -3,6 +3,12 @@
 
 ## 版本迭代记录
 
+### 0.3.4
+
+UIAlertController增加UIBarItem启动方法
+View增加调用Presenter传参数拿返回值的接口
+增加MVPCellActionModel设计TableView的左右滑动菜单（iOS11开始支持）
+
 ### 0.3.3
 
 MVPTableViewOutput和MVPCollectViewOutput增加TableView和CollectionView属性，MVPTableViewOutput增加tableView的Class设置，两个都增加了注册Cell用的Block，和注册Nib的简单方法。

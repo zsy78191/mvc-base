@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) id<MVPViewProtocol> view;
 @property (nonatomic, assign) float height;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

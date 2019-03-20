@@ -55,12 +55,16 @@
 {
     __block NSString* modelIdentifier = nil;
     [self.inputs enumerateObjectsUsingBlock:^(id<MVPInputProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        modelIdentifier = [obj mvp_identifierForModel:model];
-        if (modelIdentifier && ![modelIdentifier isEqualToString:@"cell"]) {
-            *stop = YES;
+//        NSIndexPath* i = [obj mvp_indexPathWithModel:model];
+        BOOL c = [obj containsModel:model];
+        if (c) {
+            modelIdentifier = [obj mvp_identifierForModel:model];
+            if (modelIdentifier && ![modelIdentifier isEqualToString:@"cell"]) {
+                *stop = YES;
+            }
         }
     }];
-    return modelIdentifier?modelIdentifier:@"cell";
+    return modelIdentifier;
 }
 
 @synthesize outputer = _outputer;
@@ -102,8 +106,8 @@
 }
 
 - (NSIndexPath *)mvp_indexPathWithModel:(id<MVPModelProtocol>)model {
-    __block NSUInteger idx = 0;
-    __block NSUInteger sec = 0;
+    __block NSUInteger idx = NSNotFound;
+    __block NSUInteger sec = NSNotFound;
     [self.inputs enumerateObjectsUsingBlock:^(id<MVPInputProtocol>   _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSIndexPath* p = [obj mvp_indexPathWithModel:model];
         if (p) {
@@ -149,6 +153,15 @@
 - (NSUInteger)numberOfSections {
     return self.inputs.count;
 }
+
+- (BOOL)containsModel:(id<MVPModelProtocol>)model { 
+    __block BOOL contain = NO;
+    [self.inputs enumerateObjectsUsingBlock:^(id<MVPInputProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        contain = contain || [obj containsModel:model];
+    }];
+    return contain;
+}
+
 
 - (void)setOutputer:(id<MVPOutputProtocol>)outputer
 {

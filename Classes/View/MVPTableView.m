@@ -31,8 +31,8 @@
     [super viewDidLoad];
     
     if ([self.manageView isKindOfClass:[UITableView class]]) {
-        UITableView* table = (UITableView*)self.manageView;
-        [table setAllowsSelection:NO];
+//        UITableView* table = (UITableView*)self.manageView;
+//        [table setAllowsSelection:NO];
     }
     else {
         UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
@@ -40,6 +40,15 @@
         [label setTextAlignment:NSTextAlignmentCenter];
         [self.view addSubview:label];
         label.center = self.view.center;
+    }
+}
+
+- (void)setAllowsSelection:(BOOL)allowsSelection
+{
+    _allowsSelection = allowsSelection;
+    if ([self.manageView isKindOfClass:[UITableView class]]) {
+        UITableView* table = (UITableView*)self.manageView;
+        [table setAllowsSelection:allowsSelection];
     }
 }
 

@@ -63,8 +63,14 @@
 - (void)addModel
 {
     MyModel* m = [[MyModel alloc] init];
+//    m.identifier = @"MyCell";
     m.name = [[NSDate date] description];
     [self.mainInput mvp_insertModel:m atIndex:0];
+}
+
+- (void)actionDel:(NSIndexPath*)path
+{
+    [self.ci mvp_deleteModelAtIndexPath:path];
 }
 
 - (void)cleanAll
