@@ -106,6 +106,6 @@
 
 @synthesize inputer;
 
-@synthesize identifier = _identifier;
+@synthesize cell_identifier = _cell_identifier;
 
 @end

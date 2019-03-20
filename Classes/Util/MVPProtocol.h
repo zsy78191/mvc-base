@@ -30,7 +30,7 @@
 
 @protocol MVPModelProtocol <NSObject,NSFetchRequestResult>
 
-@property (nonatomic, strong) NSString* identifier;
+@property (nonatomic, strong) NSString* cell_identifier;
 - (NSArray *)propertys;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;
 - (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model;

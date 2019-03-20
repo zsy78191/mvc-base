@@ -12,6 +12,7 @@
  
 @protocol MVPPresenterProtocol_private <NSObject>
 
+@optional
 - (void)mvp_registActionName:(NSString*)name item:(id)item;
 - (void)mvp_removeActionForItem:(id)item;
 - (void)mvp_runAction:(NSString*)actionName;

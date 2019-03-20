@@ -114,7 +114,7 @@
         }
     }
     if (!identifier) {
-        identifier = [m identifier];
+        identifier = [m cell_identifier];
     }
     __kindof UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if ([cell isKindOfClass:[MVPContentCell class]]) {
