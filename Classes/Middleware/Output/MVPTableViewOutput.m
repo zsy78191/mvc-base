@@ -282,6 +282,9 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.leadActionsArrays.count == 0  && self.actionsArrays.count == 0) {
+        return NO;
+    }
     return YES;
 }
 
