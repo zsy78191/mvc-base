@@ -376,9 +376,14 @@
     __weak typeof(self) weakSelf = self;
     return
     t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
-        UIContextualAction* action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:x.title handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-            [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+        UIContextualAction* action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:x.title handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+            });
+            
+            //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.24 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             completionHandler(YES);
+            //            });
         }];
         if (x.color) {
             action.backgroundColor = x.color;
@@ -399,9 +404,13 @@
     __weak typeof(self) weakSelf = self;
     return
     t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
-        UIContextualAction* action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:x.title handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-            [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+        UIContextualAction* action = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:x.title handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.presenter mvp_runAction:x.action value:indexPath];
+            });
+            //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.24 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             completionHandler(YES);
+            //            });
         }];
         if (x.color) {
             action.backgroundColor = x.color;

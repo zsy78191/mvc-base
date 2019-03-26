@@ -3,6 +3,11 @@
 
 ## 版本迭代记录
 
+### 0.3.5 
+
+修复iOS，tableview左滑右滑菜单bug
+
+
 ### 0.3.4
 
 UIAlertController增加UIBarItem启动方法
