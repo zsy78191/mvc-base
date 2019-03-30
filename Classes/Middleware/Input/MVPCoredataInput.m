@@ -118,7 +118,8 @@
 - (NSUInteger)mvp_count {
 //    id<NSFetchedResultsSectionInfo> info = [[self.fetch sections] firstObject];
 //    return [info numberOfObjects];
-    return [[self mvp_modelClass] MR_countOfEntities];
+//    return [[self mvp_modelClass] MR_countOfEntities];
+    return [self.fetch fetchedObjects].count;
 }
 
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path{
