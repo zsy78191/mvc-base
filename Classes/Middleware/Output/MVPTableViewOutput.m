@@ -357,7 +357,7 @@
     __weak typeof(self) weakSelf = self;
     return
     t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
-        UITableViewRowAction* action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:x.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        UITableViewRowAction* action = [UITableViewRowAction rowActionWithStyle:UIContextualActionStyleDestructive title:x.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
             [weakSelf.presenter mvp_runAction:x.action value:indexPath];
         }];
         if (x.color) {
@@ -382,7 +382,7 @@
             });
             
             //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.24 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            completionHandler(YES);
+            completionHandler(NO);
             //            });
         }];
         if (x.color) {
@@ -409,7 +409,7 @@
                 [weakSelf.presenter mvp_runAction:x.action value:indexPath];
             });
             //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.24 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            completionHandler(YES);
+            completionHandler(NO);
             //            });
         }];
         if (x.color) {
