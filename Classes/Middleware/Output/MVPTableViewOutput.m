@@ -370,6 +370,9 @@
 - (NSArray<UIContextualAction *> *)tailActions:(NSIndexPath*)indexPath
 {
     NSArray* t = self.actionsArrays;
+    if (self.actionArraysBeforeUseBlock) {
+        t = self.actionArraysBeforeUseBlock(t,[self.inputer mvp_modelAtIndexPath:indexPath]);
+    }
     if (t.count == 0) {
         return nil;
     }
@@ -397,7 +400,10 @@
 
 - (NSArray<UIContextualAction *> *)leadActions:(NSIndexPath*)indexPath
 {
-    NSArray* t = self.leadActionsArrays;
+    NSMutableArray* t = self.leadActionsArrays;
+    if (self.leadActionsArraysBeforeUseBlock) {
+        t = self.leadActionsArraysBeforeUseBlock(t,[self.inputer mvp_modelAtIndexPath:indexPath]);
+    }
     if (t.count == 0) {
         return nil;
     }

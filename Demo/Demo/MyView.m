@@ -112,6 +112,11 @@
         m.action = @"actionDel:";
         m.color = [UIColor clearColor];
     })];
+    
+    [o setLeadActionsArraysBeforeUseBlock:^NSMutableArray * _Nonnull(NSMutableArray * _Nonnull actionsArrays, id  _Nonnull model) {
+        NSLog(@"%@",model);
+        return [@[] mutableCopy];
+    }];
 //    [self setAllowsSelection:NO];
 //    self.empty = [[MyEmpty alloc] init];
 }
