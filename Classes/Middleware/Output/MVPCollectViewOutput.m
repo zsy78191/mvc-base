@@ -115,6 +115,11 @@
     [self updateEmpty];
 }
 
+- (void)moveFromIndexPath:(NSIndexPath *)fidx toIndexPath:(NSIndexPath *)tidx
+{
+    [self.collectionView moveItemAtIndexPath:fidx toIndexPath:tidx];
+}
+
 - (void)endUpdates {
     
 }

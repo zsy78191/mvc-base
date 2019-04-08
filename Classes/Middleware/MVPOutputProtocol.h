@@ -79,6 +79,8 @@
 - (void)deleteSectionAtIndex:(NSUInteger)idx;
 - (void)setEmpty:(__kindof MVPEmptyMiddleware*)empty;
 
+- (void)moveFromIndexPath:(NSIndexPath*)fidx toIndexPath:(NSIndexPath*)tidx;
+
 @property (nonatomic, strong) void(^registBlock)(id output);
 - (void)registNibCell:(NSString*)cell withIdentifier:(NSString*)identifier;
 

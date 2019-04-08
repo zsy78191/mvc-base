@@ -80,7 +80,13 @@
 
 - (void)mvp_action_selectItemAtIndexPath:(NSIndexPath *)path
 {
-    [self.ci mvp_deleteModelAtIndexPath:path];
+//    [self.ci mvp_deleteModelAtIndexPath:path];
+    id model = [self.ci mvp_modelAtIndexPath:path];
+    if([model isKindOfClass:[NSManagedObject class]])
+    {
+        MyModel* m = model;
+        m.name = [NSString stringWithFormat:@"%@",@(arc4random()%20)];
+    }
 }
 
 - (void)openCore
