@@ -157,6 +157,11 @@
     [self updataEmpty];
 }
 
+- (void)moveFromIndexPath:(NSIndexPath *)fidx toIndexPath:(NSIndexPath *)tidx
+{
+    [self.tableview moveRowAtIndexPath:fidx toIndexPath:tidx];
+}
+
 - (void)setScrollToTopWhenInsert:(BOOL)scrollToTopWhenInsert
 {
     _scrollToTopWhenInsert = scrollToTopWhenInsert;

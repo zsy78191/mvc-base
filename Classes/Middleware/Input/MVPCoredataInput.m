@@ -295,8 +295,9 @@
                 break;
                 
             case NSFetchedResultsChangeMove:
-                [self.outputer deleleAtIndexPath:indexPath];
-                [self.outputer insertAtIndexPath:p1];
+//                [self.outputer deleleAtIndexPath:indexPath];
+//                [self.outputer insertAtIndexPath:p1];
+                [self.outputer moveFromIndexPath:indexPath toIndexPath:p1];
                 break;
         }
     }
@@ -359,8 +360,9 @@
                             break;
                         case NSFetchedResultsChangeMove:
                             //                        [self.outputer moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                            [self.outputer deleleAtIndexPath:x[0]];
-                            [self.outputer insertAtIndexPath:x[1]];
+//                            [self.outputer deleleAtIndexPath:x[0]];
+//                            [self.outputer insertAtIndexPath:x[1]];
+                            [self.outputer moveFromIndexPath:x[0] toIndexPath:x[1]];
                             break;
                     }
                 }];
