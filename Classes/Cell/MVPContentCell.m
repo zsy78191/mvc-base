@@ -57,6 +57,7 @@
 
 - (void)mvp_bindModel:(id<MVPModelProtocol>)model withProperties:(NSArray<NSString *> *)properties
 {
+    NSLog(@"%s",__func__);
     [properties enumerateObjectsUsingBlock:^(NSString * _Nonnull keypath, NSUInteger idx, BOOL * _Nonnull stop) {
         RACSignal* s =
         [[[(id)model rac_valuesForKeyPath:keypath observer:self]
@@ -93,20 +94,23 @@
     return _actionTable;
 }
 
-- (void)prepareForReuse
+- (void)cleanHook
 {
-    [super prepareForReuse];
-    
     NSEnumerator* e = [self.table objectEnumerator];
     RACDisposable* d = [e nextObject];
-//    NSLog(@"%d",[d isDisposed]);
     while (d) {
         [d dispose];
         d = [e nextObject];
     }
     [self.table removeAllObjects];
     
-    
+}
+
+- (void)prepareForReuse
+{
+    NSLog(@"%s",__func__);
+    [super prepareForReuse];
+    [self cleanHook];
 //    id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter = [[model inputer] presenter];
 //    UIViewController* vc = (UIViewController*)presenter.view;
     if ([self.model isKindOfClass:[MVPViewModel class]]) {
@@ -134,6 +138,10 @@
 
 - (void)loadModel:(id<MVPModelProtocol>)model
 {
+     NSLog(@"%s",__func__);
+    
+    [self cleanHook];
+    
     if ([model isMemberOfClass:[MVPViewModel class]]) {
         [self loadViewModel:model];
         return;

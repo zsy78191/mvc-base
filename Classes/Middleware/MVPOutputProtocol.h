@@ -8,6 +8,9 @@
 
 #ifndef MVPOutputProtocol_g_h
 #define MVPOutputProtocol_g_h
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class UIView,UITableView,UICollectionView;
 @class MVPEmptyMiddleware;
 @protocol MVPOutputProtocol,MVPModelProtocol,MVPPresenterProtocol,MVPPresenterProtocol_private;
@@ -98,4 +101,8 @@
 @property (nonatomic, strong) UICollectionView* collectionView;
 @end
 
+NS_ASSUME_NONNULL_END
+
 #endif /* MVPOutputProtocol_g_h */
+
+

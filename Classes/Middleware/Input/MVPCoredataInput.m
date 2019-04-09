@@ -291,7 +291,7 @@
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self.outputer updateAtIndexPath:p2];
+//                [self.outputer updateAtIndexPath:p2];
                 break;
                 
             case NSFetchedResultsChangeMove:
@@ -356,7 +356,7 @@
                             [self.outputer deleleAtIndexPaths:@[x]];
                             break;
                         case NSFetchedResultsChangeUpdate:
-                            [self.outputer updateAtIndexPaths:@[x]];
+//                            [self.outputer updateAtIndexPaths:@[x]];
                             break;
                         case NSFetchedResultsChangeMove:
                             //                        [self.outputer moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];

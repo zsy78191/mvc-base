@@ -9,6 +9,8 @@
 #ifndef MVCProtocol_h
 #define MVCProtocol_h
 
+NS_ASSUME_NONNULL_BEGIN
+
 @import UIKit;
 @import CoreData;
 
@@ -120,6 +122,8 @@
 
 
 @end
+
+NS_ASSUME_NONNULL_END
  
 
 #endif /* MVCProtocol_h */

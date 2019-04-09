@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MVPModel;
 typedef void (^MVPModelInitailBlock)(__kindof MVPModel*);
-typedef __kindof MVPModel* (^MVPModelNewInstanceBlock)(MVPModelInitailBlock);
+typedef __kindof MVPModel* _Nullable (^MVPModelNewInstanceBlock)(MVPModelInitailBlock);
 
 @interface MVPModel : NSObject <MVPModelProtocol>
 

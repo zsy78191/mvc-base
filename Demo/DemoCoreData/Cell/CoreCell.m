@@ -27,12 +27,13 @@
 //    NSLog(@"%@",model);
     self.textLabel.text = model.name;
     
-    [self mvp_bindModel:model withProperties:@[@"name"]];
+    [self mvp_bindModel:(id)model withProperties:@[@"name"]];
     
 }
 
 - (void)mvp_value:(id)value updateForKeypath:(NSString *)keypath
 {
+    NSLog(@"%s",__func__);
     self.textLabel.text = value;
 }
 
