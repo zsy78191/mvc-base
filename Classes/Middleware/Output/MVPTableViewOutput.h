@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray* (^actionArraysBeforeUseBlock)(NSMutableArray* actionsArrays,id model);
 @property (nonatomic, strong) NSMutableArray* (^leadActionsArraysBeforeUseBlock)(NSMutableArray* actionsArrays,id model);
 
+@property (nonatomic, strong) UITableViewRowAnimation (^animationBlock)(NSString*action,id model);
 
 @end
 

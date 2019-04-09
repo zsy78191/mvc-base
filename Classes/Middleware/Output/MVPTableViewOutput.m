@@ -153,7 +153,7 @@
 - (void)deleleAtIndexPath:(NSIndexPath *)path
 {
 //    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
-    [self.tableview deleteRowsAtIndexPaths:@[path] withRowAnimation:[self currentAnimation]];
+    [self.tableview deleteRowsAtIndexPaths:@[path] withRowAnimation:[self currentAnimation:path action:@"delete"]];
     [self updataEmpty];
 }
 
@@ -182,15 +182,19 @@
 @synthesize scrollToInsertPosition = _scrollToInsertPosition;
 
 
-- (UITableViewRowAnimation)currentAnimation
+- (UITableViewRowAnimation)currentAnimation:(id)index action:(NSString*)action
 {
-    return self.animation?UITableViewRowAnimationAutomatic:UITableViewRowAnimationNone;
+    UITableViewRowAnimation a = UITableViewRowAnimationAutomatic;
+    if (self.animationBlock) {
+        a = self.animationBlock(action,index);
+    }
+    return self.animation?a:UITableViewRowAnimationNone;
 }
 
 - (void)updateAtIndexPath:(NSIndexPath *)path
 {
 //    NSIndexPath* i = [NSIndexPath indexPathForRow:idx inSection:0];
-    [self.tableview reloadRowsAtIndexPaths:@[path] withRowAnimation:[self currentAnimation]];
+    [self.tableview reloadRowsAtIndexPaths:@[path] withRowAnimation:[self currentAnimation:path action:@"update"]];
 }
 
 - (void)mvp_registerNib:(UINib *)nib forCellReuseIdentifier:(NSString *)identifier
@@ -214,7 +218,7 @@
 }
 
 - (void)deleteSectionAtIndex:(NSUInteger)idx {
-    [self.tableview deleteSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:[self currentAnimation]];
+    [self.tableview deleteSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:[self currentAnimation:@(idx) action:@"delete"]];
     [self updataEmpty];
 }
 
@@ -225,7 +229,7 @@
 }
 
 - (void)insertSectionAtIndex:(NSUInteger)idx {
-    [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:[self currentAnimation]];
+    [self.tableview insertSections:[NSIndexSet indexSetWithIndex:idx] withRowAnimation:[self currentAnimation:@(idx) action:@"insert"]];
     [self updataEmpty];
 }
 
@@ -235,7 +239,7 @@
 }
 
 - (void)deleleAtIndexPaths:(NSArray *)paths {
-    [self.tableview deleteRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
+    [self.tableview deleteRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation:paths action:@"delete"]];
     [self updataEmpty];
 }
 
@@ -249,11 +253,11 @@
 
 - (void)insertAtIndexPaths:(NSArray *)paths {
     if (self.tableview.decelerating) {
-    [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
+        [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation:paths action:@"insert"]];
     }
     else {
         [self.tableview setContentOffset:self.tableview.contentOffset animated:NO];
-        [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
+        [self.tableview insertRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation:paths action:@"insert"]];
         if (self.scrollToInsertPosition) {
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.14 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -267,7 +271,7 @@
 
 
 - (void)updateAtIndexPaths:(NSArray *)paths {
-     [self.tableview reloadRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation]];
+     [self.tableview reloadRowsAtIndexPaths:paths withRowAnimation:[self currentAnimation:paths action:@"update"]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -362,7 +366,7 @@
     __weak typeof(self) weakSelf = self;
     return
     t.map(^id _Nonnull(MVPCellActionModel*  _Nonnull x) {
-        UITableViewRowAction* action = [UITableViewRowAction rowActionWithStyle:UIContextualActionStyleDestructive title:x.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        UITableViewRowAction* action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:x.title handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
             [weakSelf.presenter mvp_runAction:x.action value:indexPath];
         }];
         if (x.color) {
@@ -374,7 +378,7 @@
 
 - (NSArray<UIContextualAction *> *)tailActions:(NSIndexPath*)indexPath
 {
-    NSArray* t = self.actionsArrays;
+    NSMutableArray* t = self.actionsArrays;
     if (self.actionArraysBeforeUseBlock) {
         t = self.actionArraysBeforeUseBlock(t,[self.inputer mvp_modelAtIndexPath:indexPath]);
     }
