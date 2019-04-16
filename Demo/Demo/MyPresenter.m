@@ -12,7 +12,7 @@
 #import "CoreInput.h"
 #import "MyView.h"
 #import "MyModel.h"
-
+@import MagicalRecord;
 
 
 @interface MyPresenter()
@@ -84,8 +84,19 @@
     id model = [self.ci mvp_modelAtIndexPath:path];
     if([model isKindOfClass:[NSManagedObject class]])
     {
-        MyModel* m = model;
-        m.name = [NSString stringWithFormat:@"%@",@(arc4random()%20)];
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext * _Nonnull localContext) {
+            MyModel* m = [model MR_inContext:localContext];
+            m.name = [NSString stringWithFormat:@"%@",@(arc4random()%20)];
+        } completion:^(BOOL contextDidSave, NSError * _Nullable error) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext * _Nonnull localContext) {
+                    MyModel* m = [model MR_inContext:localContext];
+                    m.title = [NSString stringWithFormat:@"%@",@(arc4random()%20)];
+                } completion:^(BOOL contextDidSave, NSError * _Nullable error) {
+                    
+                }];
+            });
+        }];
     }
 }
 
@@ -140,6 +151,7 @@
 //        [self.router regiestTarget:self selector:@selector(testString) asRouter:@"demo://getTestString"];
         self.testString = @"123";
         
+        [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelOff];
         
     }
     return self;

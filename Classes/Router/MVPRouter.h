@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class MVPView;
 @interface MVPRouter : NSObject
 
-
 + (void)registView:(Class)viewClass forURL:(NSString*)url;
+
 + (__kindof MVPView*)viewForURL:(NSString*)url withUserInfo:(NSDictionary * __nullable)userInfo;
 
 + (void)registRouter;

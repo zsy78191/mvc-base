@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MyModel : MVPModel
 
 @property (nonatomic, strong) NSString* name;
-
+@property (nonatomic, strong) NSString* title;
 
 @end
 

@@ -57,7 +57,7 @@
 
 - (void)mvp_bindModel:(id<MVPModelProtocol>)model withProperties:(NSArray<NSString *> *)properties
 {
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     [properties enumerateObjectsUsingBlock:^(NSString * _Nonnull keypath, NSUInteger idx, BOOL * _Nonnull stop) {
         RACSignal* s =
         [[[(id)model rac_valuesForKeyPath:keypath observer:self]
@@ -108,7 +108,7 @@
 
 - (void)prepareForReuse
 {
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
     [super prepareForReuse];
     [self cleanHook];
 //    id<MVPPresenterProtocol,MVPPresenterProtocol_private> presenter = [[model inputer] presenter];
@@ -138,7 +138,7 @@
 
 - (void)loadModel:(id<MVPModelProtocol>)model
 {
-     NSLog(@"%s",__func__);
+//     NSLog(@"%s",__func__);
     
     [self cleanHook];
     
