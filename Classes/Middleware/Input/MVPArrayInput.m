@@ -124,6 +124,9 @@
 
 - (id<MVPModelProtocol>)mvp_deleteModelAtIndexPath:(NSIndexPath *)path
 {
+    if (!path) {
+        return nil;
+    }
     NSUInteger idx = [path row];
     id obj = [self.table objectAtIndex:idx];
     [self.table removeObjectAtIndex:idx];

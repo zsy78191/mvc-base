@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 - (void)mvp_pushViewController:(__kindof UIViewController*)vc;
-- (void)mvp_popViewController:(__kindof UIViewController*)vc;
+- (void)mvp_popViewController:(__kindof  UIViewController* _Nullable)vc;
 - (void)mvp_showViewController:(__kindof UIViewController*)vc;
 - (void)mvp_presentViewController:(__kindof UIViewController*)vc animated: (BOOL)flag completion:(void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);
 - (void)mvp_dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);;
