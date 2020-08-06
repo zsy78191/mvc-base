@@ -14,31 +14,31 @@ NS_ASSUME_NONNULL_BEGIN
 @import UIKit;
 @import CoreData;
 
-//@protocol MVPTupleProtocol <NSObject>
-//
-//- (NSArray *)allObjects;
-//@property (nonatomic, readonly, nullable) id first;
-//@property (nonatomic, readonly, nullable) id second;
-//@property (nonatomic, readonly, nullable) id third;
-//@property (nonatomic, readonly, nullable) id fourth;
-//@property (nonatomic, readonly, nullable) id fifth;
-//@property (nonatomic, readonly, nullable) id last;
-//@property (nonatomic, readonly) NSUInteger count;
-//
-//@end
+@protocol MVPViewProtocol;
+@protocol MVPOutputProtocol;
+@protocol MVPInputProtocol;
+@protocol MVPPresenterProtocol_private;
+@protocol NSFetchRequestResult;
 
-@protocol MVPViewProtocol,MVPOutputProtocol,MVPInputProtocol,MVPPresenterProtocol_private,NSFetchRequestResult;
-@class UIViewController,MVPInitModel,NSManagedObject,UIGestureRecognizer,UIAlertController,UIView;
+@class UIViewController;
+@class UIView;
+@class MVPInitModel;
+@class NSManagedObject;
+@class UIGestureRecognizer;
+@class UIAlertController;
 
+/**
+ Model协议
+ */
 @protocol MVPModelProtocol <NSObject,NSFetchRequestResult>
 
 @property (nonatomic, strong) NSString* cell_identifier;
-- (NSArray *)propertys;
 @property (nonatomic, weak) id<MVPInputProtocol> inputer;
-- (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model;
-- (BOOL)mvp_sameWithCoreDataModel:(__kindof NSManagedObject*)model;
-
+- (NSArray *)propertys;
 - (void)removeFromInputer;
+
+- (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model NS_DEPRECATED_IOS(4_0,4_0);
+- (BOOL)mvp_sameWithCoreDataModel:(__kindof NSManagedObject*)model NS_DEPRECATED_IOS(4_0,4_0);
 
 @end
 
@@ -81,13 +81,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mvp_presentViewController:(__kindof UIViewController*)vc animated: (BOOL)flag completion:(void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);
 - (void)mvp_dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);;
 
-- (UIAlertController*)alert:(NSString*)title
+- (UIAlertController*)alert:(nullable NSString*)title
                   recommend:(NSString*)recommend
                      action:(NSString*)action
                      cancel:(NSString*)cancel
                       block:(void(^)(NSInteger idx, __kindof UIViewController* vc))block;
 
-- (UIAlertController*)actionsheet:(NSString*)title
+- (UIAlertController*)actionsheet:(nullable NSString*)title
                         recommend:(NSString*)recommend
                            action:(NSString*)action
                            cancel:(NSString*)cancel

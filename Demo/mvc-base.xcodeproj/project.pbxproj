@@ -317,6 +317,17 @@
 			path = Middleware;
 			sourceTree = "<group>";
 		};
+		D447908D230FC0B400AAFEE5 /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				D4616C1821D22BB60021F048 /* DemoCollectionView */,
+				D40EDA6521D0AF4C0018F46E /* DemoUI */,
+				D47B69EE21CE121500214999 /* DemoCoreData */,
+				D46DFBC821C3673A00675B86 /* Demo */,
+			);
+			path = Demos;
+			sourceTree = "<group>";
+		};
 		D4616C1821D22BB60021F048 /* DemoCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,11 +560,8 @@
 		D46DFB8221C361C100675B86 = {
 			isa = PBXGroup;
 			children = (
+				D447908D230FC0B400AAFEE5 /* Demos */,
 				D4616C3E21D37D860021F048 /* Classes */,
-				D4616C1821D22BB60021F048 /* DemoCollectionView */,
-				D40EDA6521D0AF4C0018F46E /* DemoUI */,
-				D47B69EE21CE121500214999 /* DemoCoreData */,
-				D46DFBC821C3673A00675B86 /* Demo */,
 				D46DFB8D21C361C100675B86 /* mvc-base */,
 				D46DFBA621C361C100675B86 /* mvc-baseTests */,
 				D46DFBB121C361C100675B86 /* mvc-baseUITests */,

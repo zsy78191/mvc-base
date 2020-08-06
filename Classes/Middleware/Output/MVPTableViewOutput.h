@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class UINib;
-@interface MVPTableViewOutput : MVPBaseMiddleware <MVPTableViewOutputProtocol>
+@interface MVPTableViewOutput : MVPBaseMiddleware <MVPTableViewOutputProtocol, UITableViewDelegate, UITableViewDataSource>
 
 - (void)mvp_registerNib:(nullable UINib *)nib forCellReuseIdentifier:(NSString *)identifier NS_AVAILABLE_IOS(5_0);
 - (void)mvp_registerClass:(nullable Class)cellClass forCellReuseIdentifier:(NSString *)identifier NS_AVAILABLE_IOS(6_0);

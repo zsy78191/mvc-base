@@ -39,7 +39,7 @@
     return propertyArray.copy;
 }
 
-- (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model
+- (BOOL)mvp_sameWithModel:(id<MVPModelProtocol>)model 
 {
     return [self sameWithObj:model];
 }
